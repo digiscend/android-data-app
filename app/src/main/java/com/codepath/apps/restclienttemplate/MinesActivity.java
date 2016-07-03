@@ -6,19 +6,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
+import com.codepath.apps.restclienttemplate.models.Project;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.StringJoiner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,39 +44,34 @@ public class MinesActivity extends AppCompatActivity
     {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_mines);
-        Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
+       // Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
 
-        setSupportActionBar (toolbar);
-
-        TextView txtbox = (TextView)findViewById(R.id.txtbox);
+        //setSupportActionBar (toolbar);
 
         try
         {
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
             //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
             String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice03").get ();
-            String result2 = parseResult(str_result);
-            txtbox.setText (result2);
+            ArrayList<Project> projects = parseResult(str_result);
+            setProjects(projects);
         }
         catch(Exception e)
         {
-            txtbox.setText(e.getMessage ());
+
         }
-        FloatingActionButton fab = (FloatingActionButton) findViewById (R.id.fab);
-        fab.setOnClickListener (new View.OnClickListener ()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                Snackbar.make (view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction ("Action", null).show ();
-            }
-        });
+
     }
 
-    protected String parseResult(String json)
+    /**
+     * @see http://www.codeproject.com/Articles/267023/Send-and-receive-json-between-android-and-php
+     * @param json
+     * @return
+     */
+    protected ArrayList<Project> parseResult(String json)
     {
-        String projectNames = new String();
+        ArrayList<Project> projects =
+                new ArrayList<Project>();
         try
         {
             JSONObject obj = new JSONObject (json);
@@ -87,15 +80,35 @@ public class MinesActivity extends AppCompatActivity
             for (int i = 0; i < jProjects.length (); i++)
             {
                 HashMap<String, String> map = new HashMap<String, String> ();
-                JSONObject project = jProjects.getJSONObject (i);
-                projectNames += project.getString ("name") + "\n";
+                JSONObject jsonProject = jProjects.getJSONObject (i);
+                Project p = new Project();
+                p.name = jsonProject.getString ("name");
+                p.id = jsonProject.getInt ("id");
+                projects.add (p);
             }
         }
         catch(Exception e)
         {
-            return "error at 95:"   + e.getMessage ();
+            return null;
         }
-        return projectNames;
+        return projects;
 
+    }
+
+    protected void setProjects(ArrayList<Project> projects)
+    {
+        ArrayList<String> projectNames = new ArrayList<String> ();
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String> (this, R.layout.activity_mines);
+        String[] vals = new String[projects.size ()];
+        for (int i = 0; i < projects.size (); i++)
+        {
+            //projectNames.add (projects.get (i).name);
+            //adapter.add (projects.get (i).name);
+            vals[i] = projects.get (i).name;
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String> (this, R.layout.activity_listview,vals);
+        ListView listView = (ListView) findViewById(R.id.project_list);
+        listView.setAdapter(adapter);
     }
 }

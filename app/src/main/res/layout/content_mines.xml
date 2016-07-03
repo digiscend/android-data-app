@@ -8,11 +8,7 @@
     tools:context="com.codepath.apps.restclienttemplate.MinesActivity"
     tools:showIn="@layout/activity_mines">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:id="@+id/txtbox"
-        android:text="@string/large_text" />
+
+
 
 </android.support.v4.widget.NestedScrollView>
