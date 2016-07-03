@@ -8,12 +8,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 public class MinesActivity extends AppCompatActivity
@@ -47,8 +54,10 @@ public class MinesActivity extends AppCompatActivity
         try
         {
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
-            String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
-            txtbox.setText (str_result);
+            //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
+            String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice02").get ();
+            String result2 = parseResult(str_result);
+            txtbox.setText (result2);
         }
         catch(Exception e)
         {
@@ -64,5 +73,28 @@ public class MinesActivity extends AppCompatActivity
                         .setAction ("Action", null).show ();
             }
         });
+    }
+
+    protected String parseResult(String json)
+    {
+        ArrayList<String> projectNames = new ArrayList<String> ();
+        try
+        {
+            JSONObject obj = new JSONObject (json);
+            JSONArray jProjects = obj.getJSONArray ("projects");
+
+            for (int i = 0; i < jProjects.length (); i++)
+            {
+                HashMap<String, String> map = new HashMap<String, String> ();
+                String e = jProjects.getString (i);
+                projectNames.add (e);
+            }
+        }
+        catch(Exception e)
+        {
+            return e.getMessage ();
+        }
+        return projectNames.toString ();
+
     }
 }
