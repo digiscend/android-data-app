@@ -57,7 +57,8 @@ public class MinesActivity extends AppCompatActivity
         {
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
             //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
-            String str_result = new ReaderTask ().execute ("http://www.gateway.local/api/projectlist?lang=en").get ();
+            String url = getResources().getString(R.string.api_server) + getResources().getString(R.string.api_projectlist) + "?lang=" + getResources().getString(R.string.api_q_lang);
+            String str_result = new ReaderTask ().execute (url).get ();
             Project p = null;
             ArrayList<Project> projects = p.parseJson(str_result);
             setProjects(projects);

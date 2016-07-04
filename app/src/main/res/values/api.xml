@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_server">http://192.168.5.2</string>
+    <string name="api_projectlist">/api/projectlist</string>
+    <string name="api_project">/api/project</string>
+    <string name="api_company">/api/company</string>
+    <string name="api_country">/api/country</string>
+    <string name="api_material">/api/material</string>
+    <string name="api_status">/api/status</string>
+    <string name="api_q_lang">en</string>
+</resources>

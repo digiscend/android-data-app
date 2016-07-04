@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Project;
@@ -35,7 +36,8 @@ public class ProjectViewActivity extends AppCompatActivity
         String str_result = null;
         try
         {
-            str_result = new ReaderTask ().execute ("http://www.gateway.local/api/project/" + projectid).get ();
+            String url=getResources().getString(R.string.api_server) + getResources().getString(R.string.api_project) + "/" + projectid + "?lang=" + getResources().getString(R.string.api_q_lang);
+            str_result = new ReaderTask ().execute (url).get ();
             Project p = null;
             projects = p.parseJson(str_result);
         } catch (InterruptedException e)
@@ -54,9 +56,11 @@ public class ProjectViewActivity extends AppCompatActivity
         TextView tvName = (TextView)findViewById (R.id.projectName);
         TextView tvCountry = (TextView)findViewById (R.id.countryName);
         TextView tvCompany = (TextView)findViewById (R.id.companyName);
+        TextView tvIntro = (TextView)findViewById (R.id.projectIntro);
 
-        tvName.setText (projects.get (0).name);
+        setTitle(projects.get (0).name);
         tvCountry.setText (projects.get (0).country);
+        tvIntro.setText (Html.fromHtml (projects.get (0).intro));
         if(projects.get (0).company != null)
             tvCompany.setText (projects.get (0).company.name);
     }

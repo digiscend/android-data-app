@@ -16,7 +16,7 @@ public class Project
     //public int company_id;
     public String country;
     public Company company = null;
-
+    public String intro;
     public Project() {
 
     }
@@ -68,12 +68,14 @@ public class Project
         {
             if(!jProject.has ("name") ||
                     !jProject.has ("htmlid") ||
+                    !jProject.has ("intro") ||
                     !jProject.has ("countryName"))
                 return null;
 
             obj.name = jProject.getString ("name");
             obj.htmlid = jProject.getString ("htmlid");
             obj.country = jProject.getString ("countryName");
+            obj.intro = jProject.getString ("intro");
 
             if(jProject.has ("selectedCompany"))
             {
