@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate;
+package com.digiscend.apps.browser;
 
 import android.content.Context;
 

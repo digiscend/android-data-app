@@ -1,18 +1,14 @@
-package com.codepath.apps.restclienttemplate;
+package com.digiscend.apps.browser;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.apps.restclienttemplate.models.Project;
+import com.digiscend.apps.browser.models.Project;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 

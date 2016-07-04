@@ -8,8 +8,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.codepath.apps.restclienttemplate.ProjectViewActivity">
+    tools:context="com.digiscend.apps.browser.ProjectViewActivity">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/companyLogo"
+        android:layout_alignTop="@+id/companyName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +26,9 @@
         android:id="@+id/countryName"
         android:layout_below="@+id/companyName"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/companyLogo"
+        android:layout_toStartOf="@+id/companyLogo"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,37 +37,28 @@
         android:text="Barrick Gold"
         android:id="@+id/companyName"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/companyLogo"
+        android:layout_toStartOf="@+id/companyLogo"/>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
-                android:layout_below="@+id/countryName"
-                android:id="@+id/scrollView">
+                android:id="@+id/scrollView"
+                android:layout_below="@+id/companyLogo">
 
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="intro text"
-        android:scrollbars = "vertical"
-        android:id="@+id/projectIntro"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="intro text"
+            android:scrollbars = "vertical"
+            android:id="@+id/projectIntro"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 
     </ScrollView>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/companyLogo"
-        android:layout_alignTop="@+id/companyName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate.models;
+package com.digiscend.apps.browser.models;
 
 import java.util.List;
 

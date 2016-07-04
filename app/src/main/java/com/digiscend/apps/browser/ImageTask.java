@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate;
+package com.digiscend.apps.browser;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

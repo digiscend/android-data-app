@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "com.codepath.apps.restclienttemplate"
+        applicationId "com.digiscend.apps.restclienttemplate"
         minSdkVersion 16
         targetSdkVersion 24
     }

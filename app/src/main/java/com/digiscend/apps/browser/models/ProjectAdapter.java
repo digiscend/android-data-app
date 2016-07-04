@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate.models;
+package com.digiscend.apps.browser.models;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.codepath.apps.restclienttemplate.R;
+import com.digiscend.apps.browser.R;
 
 import java.util.ArrayList;
 
