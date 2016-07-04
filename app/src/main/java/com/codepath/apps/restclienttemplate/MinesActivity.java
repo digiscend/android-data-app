@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Project;
+import com.codepath.apps.restclienttemplate.models.ProjectAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -62,6 +64,14 @@ public class MinesActivity extends AppCompatActivity
         }
 
     }
+    /*
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id)
+    {
+        String item = (String) getListAdapter().getItem(position);
+        return;
+    }
+    */
 
     /**
      * @see http://www.codeproject.com/Articles/267023/Send-and-receive-json-between-android-and-php
@@ -107,7 +117,7 @@ public class MinesActivity extends AppCompatActivity
             vals[i] = projects.get (i).name;
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String> (this, R.layout.activity_listview,vals);
+        ProjectAdapter adapter = new ProjectAdapter (this, projects);
         ListView listView = (ListView) findViewById(R.id.project_list);
         listView.setAdapter(adapter);
     }
