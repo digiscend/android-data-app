@@ -13,6 +13,7 @@ public class Company
 {
     public String htmlid;
     public String name;
+    public String logosrc;
     //public int company_id;
     //public String country;
 
@@ -66,11 +67,13 @@ public class Company
         {
                 Company p = new Company ();
                 if(!jCompany.has ("name") ||
+                        !jCompany.has ("logosrc") ||
                         !jCompany.has ("htmlid"))
                     return null;
 
             obj.name = jCompany.getString ("name");
             obj.htmlid = jCompany.getString ("htmlid");
+            obj.logosrc = jCompany.getString ("logosrc");
                 //p.country = jsonProject.getString ("countryName");
 
         }

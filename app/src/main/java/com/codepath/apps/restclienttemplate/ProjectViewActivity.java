@@ -1,12 +1,18 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Project;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -48,10 +54,6 @@ public class ProjectViewActivity extends AppCompatActivity
             e.printStackTrace ();
         }
 
-
-
-
-
         setContentView (R.layout.activity_project_view);
         TextView tvName = (TextView)findViewById (R.id.projectName);
         TextView tvCountry = (TextView)findViewById (R.id.countryName);
@@ -63,5 +65,23 @@ public class ProjectViewActivity extends AppCompatActivity
         tvIntro.setText (Html.fromHtml (projects.get (0).intro));
         if(projects.get (0).company != null)
             tvCompany.setText (projects.get (0).company.name);
+
+
+        String url = null;
+
+
+        try
+        {
+            url = getResources().getString(R.string.api_server) + projects.get (0).company.logosrc;
+            Bitmap bitmap = new ImageTask ().execute (url).get ();
+            ImageView iview = (ImageView)findViewById (R.id.companyLogo);
+            iview.setImageBitmap (bitmap);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace ();
+        } catch (ExecutionException e)
+        {
+            e.printStackTrace ();
+        }
     }
 }
