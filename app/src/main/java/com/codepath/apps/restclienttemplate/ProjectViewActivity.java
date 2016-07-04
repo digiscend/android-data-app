@@ -4,6 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.codepath.apps.restclienttemplate.models.Project;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 public class ProjectViewActivity extends AppCompatActivity
 {
 
@@ -11,21 +16,46 @@ public class ProjectViewActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_project_view);
 
         String newString;
+        int projectid = 0;
+
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 newString= null;
             } else {
-                newString= extras.getString(MinesActivity.EXTRA_MESSAGE);
+                projectid = extras.getInt(MinesActivity.EXTRA_MESSAGE);
             }
         } else {
-            newString= (String) savedInstanceState.getSerializable(MinesActivity.EXTRA_MESSAGE);
+            projectid= (int) savedInstanceState.getSerializable(MinesActivity.EXTRA_MESSAGE);
         }
-        TextView tvName = (TextView)findViewById (R.id.projectName);
-        tvName.setText (newString);
 
+        ArrayList<Project> projects = null;
+        String str_result = null;
+        try
+        {
+            str_result = new ReaderTask ().execute ("http://www.gateway.local/api/project/" + projectid).get ();
+            Project p = null;
+            projects = p.parseJson(str_result);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace ();
+        } catch (ExecutionException e)
+        {
+            e.printStackTrace ();
+        }
+
+
+
+
+
+        TextView tvName = (TextView)findViewById (R.id.projectName);
+        TextView tvCountry = (TextView)findViewById (R.id.countryName);
+        TextView tvCompany = (TextView)findViewById (R.id.companyName);
+
+        setContentView (R.layout.activity_project_view);
+        tvName.setText (projects.get (0).name);
+        tvName.setText (projects.get (0).country);
     }
 }

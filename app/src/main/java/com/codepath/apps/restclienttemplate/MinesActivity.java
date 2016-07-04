@@ -57,8 +57,9 @@ public class MinesActivity extends AppCompatActivity
         {
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
             //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
-            String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice03").get ();
-            ArrayList<Project> projects = parseResult(str_result);
+            String str_result = new ReaderTask ().execute ("http://www.gateway.local/api/projectlist?lang=en").get ();
+            Project p = null;
+            ArrayList<Project> projects = p.parseJson(str_result);
             setProjects(projects);
         }
         catch(Exception e)
@@ -76,37 +77,7 @@ public class MinesActivity extends AppCompatActivity
     }
     */
 
-    /**
-     * @see http://www.codeproject.com/Articles/267023/Send-and-receive-json-between-android-and-php
-     * @param json
-     * @return
-     */
-    protected ArrayList<Project> parseResult(String json)
-    {
-        ArrayList<Project> projects =
-                new ArrayList<Project>();
-        try
-        {
-            JSONObject obj = new JSONObject (json);
-            JSONArray jProjects = obj.getJSONArray ("projects");
 
-            for (int i = 0; i < jProjects.length (); i++)
-            {
-                HashMap<String, String> map = new HashMap<String, String> ();
-                JSONObject jsonProject = jProjects.getJSONObject (i);
-                Project p = new Project();
-                p.name = jsonProject.getString ("name");
-                p.id = jsonProject.getInt ("id");
-                projects.add (p);
-            }
-        }
-        catch(Exception e)
-        {
-            return null;
-        }
-        return projects;
-
-    }
 
     protected void setProjects(ArrayList<Project> projects)
     {

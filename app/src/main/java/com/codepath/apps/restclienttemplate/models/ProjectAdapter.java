@@ -1,14 +1,12 @@
 package com.codepath.apps.restclienttemplate.models;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.codepath.apps.restclienttemplate.ProjectViewActivity;
 import com.codepath.apps.restclienttemplate.R;
 
 import java.util.ArrayList;
@@ -32,10 +30,11 @@ public class ProjectAdapter extends ArrayAdapter<Project>
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_listview , parent, false);
         }
         // Lookup view for data population
-        TextView tvName = (TextView) convertView.findViewById(R.id.projectname);
-        //TextView tvId = (TextView) convertView.findViewById(R.id.projectid);
+        TextView tvName = (TextView) convertView.findViewById(R.id.projectName);
+        TextView tvCountry = (TextView) convertView.findViewById(R.id.countryName);
         // Populate the data into the template view using the data object
-        tvName.setText(project.name + "(" + project.id + ")");
+        tvName.setText(project.name);
+        tvCountry.setText(project.country);
         //tvId.setText(project.id);
         // Return the completed view to render on screen
 
