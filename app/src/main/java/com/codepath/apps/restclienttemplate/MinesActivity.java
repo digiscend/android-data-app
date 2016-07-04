@@ -99,7 +99,7 @@ public class MinesActivity extends AppCompatActivity
                                     long id) {
                 Project entry= (Project) parent.getAdapter().getItem(position);
                 Intent intent = new Intent(getBaseContext (), ProjectViewActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, entry.name);
+                intent.putExtra(EXTRA_MESSAGE, entry.htmlid);
                 startActivity(intent);
             }
         });

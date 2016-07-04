@@ -18,17 +18,17 @@ public class ProjectViewActivity extends AppCompatActivity
         super.onCreate (savedInstanceState);
 
         String newString;
-        int projectid = 0;
+        String projectid = "";
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 newString= null;
             } else {
-                projectid = extras.getInt(MinesActivity.EXTRA_MESSAGE);
+                projectid = extras.getString(MinesActivity.EXTRA_MESSAGE);
             }
         } else {
-            projectid= (int) savedInstanceState.getSerializable(MinesActivity.EXTRA_MESSAGE);
+            projectid= (String) savedInstanceState.getSerializable(MinesActivity.EXTRA_MESSAGE);
         }
 
         ArrayList<Project> projects = null;
@@ -50,12 +50,14 @@ public class ProjectViewActivity extends AppCompatActivity
 
 
 
+        setContentView (R.layout.activity_project_view);
         TextView tvName = (TextView)findViewById (R.id.projectName);
         TextView tvCountry = (TextView)findViewById (R.id.countryName);
         TextView tvCompany = (TextView)findViewById (R.id.companyName);
 
-        setContentView (R.layout.activity_project_view);
         tvName.setText (projects.get (0).name);
-        tvName.setText (projects.get (0).country);
+        tvCountry.setText (projects.get (0).country);
+        if(projects.get (0).company != null)
+            tvCompany.setText (projects.get (0).company.name);
     }
 }

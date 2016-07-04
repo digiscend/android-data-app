@@ -9,15 +9,14 @@ import java.util.HashMap;
 /**
  * Created by vikas on 03/07/16.
  */
-public class Project
+public class Company
 {
     public String htmlid;
     public String name;
     //public int company_id;
-    public String country;
-    public Company company = null;
+    //public String country;
 
-    public Project() {
+    public Company() {
 
     }
 
@@ -26,10 +25,10 @@ public class Project
      * @param json
      * @return
      */
-    public static ArrayList<Project> parseJson(String json)
+    public static ArrayList<Company> parseJson(String json)
     {
-        ArrayList<Project> projects =
-                new ArrayList<Project>();
+        ArrayList<Company> companies =
+                new ArrayList<Company>();
         try
         {
             JSONObject obj = new JSONObject (json);
@@ -41,17 +40,16 @@ public class Project
             for (int i = 0; i < jProjects.length (); i++)
             {
                 HashMap<String, String> map = new HashMap<String, String> ();
-                JSONObject jsonProject = jProjects.getJSONObject (i);
-
-                Project p = parseJsonObject (jsonProject);
-                projects.add (p);
+                JSONObject jCompany = jProjects.getJSONObject (i);
+                Company obji = parseJsonObject(jCompany);
+                companies.add (obji);
             }
         }
         catch(Exception e)
         {
             return null;
         }
-        return projects;
+        return companies;
 
     }
 
@@ -61,25 +59,20 @@ public class Project
      * @param json
      * @return
      */
-    public static Project parseJsonObject(JSONObject jProject)
+    public static Company parseJsonObject(JSONObject jCompany)
     {
-        Project obj = new Project ();
+        Company obj = new Company ();
         try
         {
-            if(!jProject.has ("name") ||
-                    !jProject.has ("htmlid") ||
-                    !jProject.has ("countryName"))
-                return null;
+                Company p = new Company ();
+                if(!jCompany.has ("name") ||
+                        !jCompany.has ("htmlid"))
+                    return null;
 
-            obj.name = jProject.getString ("name");
-            obj.htmlid = jProject.getString ("htmlid");
-            obj.country = jProject.getString ("countryName");
+            obj.name = jCompany.getString ("name");
+            obj.htmlid = jCompany.getString ("htmlid");
+                //p.country = jsonProject.getString ("countryName");
 
-            if(jProject.has ("selectedCompany"))
-            {
-                Company c = null;
-                obj.company = c.parseJsonObject(jProject.getJSONObject ("selectedCompany"));
-            }
         }
         catch(Exception e)
         {
