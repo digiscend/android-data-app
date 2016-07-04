@@ -7,5 +7,10 @@
     <string name="Mines_Activity_Title">Mines Activity Title</string>
     <string name="title_activity_mines">MinesActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="top_projects_label">Top Projects</string>
+    <string name="browse_by_country_label">Browse by Country</string>
+    <string name="browse_by_owner_label">Browse by Owner</string>
+    <string name="browse_by_material_label">Browse by Metals</string>
+    <string name="browse_by_stage_label">Browse by Stage</string>
 
 </resources>

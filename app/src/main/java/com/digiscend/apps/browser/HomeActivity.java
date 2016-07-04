@@ -7,12 +7,12 @@ import android.view.View;
 
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
-public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
+public class HomeActivity extends OAuthLoginActionBarActivity<RestClient> {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_home);
 	}
 
 
@@ -47,8 +47,28 @@ public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
 
 	public void loginSwitchView(View view)
 	{
-		Intent intent = new Intent (LoginActivity.this, MinesActivity.class);
-		startActivity(intent);
+
 	}
 
+	public void showBrowseCountry(View view)
+	{
+	}
+
+	public void showBrowseOwner(View view)
+	{
+	}
+
+	public void showBrowseMaterial(View view)
+	{
+	}
+
+	public void showBrowseStage(View view)
+	{
+	}
+
+	public void showTopProjects(View view)
+	{
+		Intent intent = new Intent (HomeActivity.this, MinesActivity.class);
+		startActivity(intent);
+	}
 }

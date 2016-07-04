@@ -62,9 +62,7 @@ public class ProjectViewActivity extends AppCompatActivity
         if(projects.get (0).company != null)
             tvCompany.setText (projects.get (0).company.name);
 
-
         String url = null;
-
 
         try
         {
@@ -72,10 +70,12 @@ public class ProjectViewActivity extends AppCompatActivity
             Bitmap bitmap = new ImageTask ().execute (url).get ();
             ImageView iview = (ImageView)findViewById (R.id.companyLogo);
             iview.setImageBitmap (bitmap);
-        } catch (InterruptedException e)
+        }
+        catch (InterruptedException e)
         {
             e.printStackTrace ();
-        } catch (ExecutionException e)
+        }
+        catch (ExecutionException e)
         {
             e.printStackTrace ();
         }
