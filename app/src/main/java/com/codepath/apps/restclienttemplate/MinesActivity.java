@@ -1,12 +1,14 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import org.json.JSONObject;
 
 public class MinesActivity extends AppCompatActivity
 {
+    public final static String EXTRA_MESSAGE = "com.example.ListViewTest.MESSAGE";
 
     private String readStream(InputStream is) {
         try {
@@ -119,6 +122,16 @@ public class MinesActivity extends AppCompatActivity
 
         ProjectAdapter adapter = new ProjectAdapter (this, projects);
         ListView listView = (ListView) findViewById(R.id.project_list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener () {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Project entry= (Project) parent.getAdapter().getItem(position);
+                Intent intent = new Intent(getBaseContext (), ProjectViewActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, entry.name);
+                startActivity(intent);
+            }
+        });
         listView.setAdapter(adapter);
     }
 }
