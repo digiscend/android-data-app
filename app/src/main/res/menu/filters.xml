@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/filter_by_metals"
+          android:title="@string/menuitem_filter_by_metals"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/filter_by_stages"
+          android:title="@string/menuitem_filter_by_stages"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/filter_by_owners"
+          android:title="@string/menuitem_filter_by_owners"
+          android:showAsAction="ifRoom"/>
+</menu>

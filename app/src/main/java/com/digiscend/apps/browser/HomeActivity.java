@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
@@ -19,7 +22,9 @@ public class HomeActivity extends AppCompatActivity
 	// Inflate the menu; this adds items to the action bar if it is present.
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.login, menu);
+		super.onCreateOptionsMenu (menu);
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.home, menu);
 		return true;
 	}
 
@@ -55,5 +60,18 @@ public class HomeActivity extends AppCompatActivity
 	{
 		Intent intent = new Intent (HomeActivity.this, MinesActivity.class);
 		startActivity(intent);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Toast.makeText(getApplicationContext(),	item.getTitle() + " selected", Toast.LENGTH_SHORT).show();
+
+		switch (item.getItemId()) {
+			case R.id.aboutmenuitem:
+				Intent intent = new Intent (HomeActivity.this, AboutActivity.class);
+				startActivity(intent);
+				break;
+		}
+		return true;
 	}
 }

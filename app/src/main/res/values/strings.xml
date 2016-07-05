@@ -12,5 +12,15 @@
     <string name="browse_by_owner_label">Browse by Owner</string>
     <string name="browse_by_material_label">Browse by Metals</string>
     <string name="browse_by_stage_label">Browse by Stage</string>
+    <string name="menuitem_filter_by_metals">Filter by Metals</string>
+    <string name="menuitem_filter_by_stages">Filter by Stages</string>
+    <string name="menuitem_filter_by_owners">Filter By Owner</string>
+    <string name="menuitem_about">About</string>
+    <string name="about_msg1">Av. Esteban Campodónico 315</string>
+    <string name="about_msg2">La Victoria, 15034</string>
+    <string name="about_msg3">Lima, Peru</string>
+    <string name="about_msg4">Peru : (+51) 959 502 518</string>
+    <string name="about_msg5">Landline: +51 1 470 0685</string>
+    <string name="about_msg6">Mobile: +51 959502518</string>
 
 </resources>
