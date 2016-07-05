@@ -32,6 +32,9 @@ public class BrowserFilter
             case BrowseActivity.BROWSE_STAGE:
                 key = "status";
                 break;
+            case BrowseActivity.BROWSE_METAL:
+                key = "metals";
+                break;
         }
 
         ArrayList<BrowserFilter> filtervals =

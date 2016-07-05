@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity
 	public void showBrowseMaterial(View view)
 	{
 		Intent intent = new Intent (HomeActivity.this, BrowseActivity.class);
-		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_MATERIAL);
+		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_METAL);
 		startActivity(intent);
 	}
 

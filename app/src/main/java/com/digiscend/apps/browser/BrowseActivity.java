@@ -28,7 +28,7 @@ public class BrowseActivity extends AppCompatActivity
 
     public final static String BROWSE_STAGE = "stage";
 
-    public final static String BROWSE_MATERIAL = "material";
+    public final static String BROWSE_METAL = "metal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,6 +56,9 @@ public class BrowseActivity extends AppCompatActivity
                 break;
             case BROWSE_COUNTRY:
                 api_browselisttype = getResources().getString(R.string.api_countrylist);
+                break;
+            case BROWSE_METAL:
+                api_browselisttype = getResources().getString(R.string.api_metallist);
                 break;
         }
 
