@@ -87,7 +87,7 @@ public class BrowseActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 BrowserFilter val= (BrowserFilter) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(getBaseContext (), BrowseActivity.class);
+                Intent intent = new Intent(getBaseContext (), MinesActivity.class);
                 intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, val.withLastBrowseType());
                 startActivity(intent);
             }

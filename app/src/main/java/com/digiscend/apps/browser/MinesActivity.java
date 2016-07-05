@@ -25,6 +25,28 @@ public class MinesActivity extends AppCompatActivity
     {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_mines);
+
+        String browsetype = "";
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                browsetype = null;
+            } else {
+                browsetype = extras.getString(BrowseActivity.EXTRA_BROWSETYPE);
+            }
+        } else {
+            browsetype = (String) savedInstanceState.getSerializable(BrowseActivity.EXTRA_BROWSETYPE);
+        }
+
+        String filters = "";
+        if(browsetype != null)
+        {
+            String[] ss = browsetype.split ("=");
+            filters = "/" + ss[0] + "/" + ss[1];
+        }
+
+
         // Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
 
         //setSupportActionBar (toolbar);
@@ -33,7 +55,7 @@ public class MinesActivity extends AppCompatActivity
         {
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
             //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
-            String url = getResources ().getString (R.string.api_server) + getResources ().getString (R.string.api_projectlist) + "?lang=" + getResources ().getString (R.string.api_q_lang);
+            String url = getResources ().getString (R.string.api_server) + getResources ().getString (R.string.api_projectlist) + filters + "?lang=" + getResources ().getString (R.string.api_q_lang);
             String str_result = new ReaderTask ().execute (url).get ();
             Project p = null;
             ArrayList<Project> projects = p.parseJson (str_result);
