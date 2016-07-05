@@ -48,12 +48,23 @@ public class BrowseActivity extends AppCompatActivity
             browsetype = (String) savedInstanceState.getSerializable(EXTRA_BROWSETYPE);
         }
 
+        String api_browselisttype = "";
+        switch(browsetype)
+        {
+            case BROWSE_STAGE:
+                api_browselisttype = getResources().getString(R.string.api_stagelist);
+                break;
+            case BROWSE_COUNTRY:
+                api_browselisttype = getResources().getString(R.string.api_countrylist);
+                break;
+        }
+
         try
         {
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
             //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
             String url = getResources().getString(R.string.api_server)
-                    + getResources().getString(R.string.api_countrylist)
+                    + api_browselisttype
                     + "?lang=" + getResources().getString(R.string.api_q_lang);
 
             String str_result = new ReaderTask ().execute (url).get ();

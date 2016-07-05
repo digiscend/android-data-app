@@ -29,6 +29,9 @@ public class BrowserFilter
             case BrowseActivity.BROWSE_COUNTRY:
                 key = "countries";
                 break;
+            case BrowseActivity.BROWSE_STAGE:
+                key = "status";
+                break;
         }
 
         ArrayList<BrowserFilter> filtervals =
