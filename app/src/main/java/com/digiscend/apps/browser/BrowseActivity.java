@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.digiscend.apps.browser.models.BrowserFilter;
 import com.digiscend.apps.browser.models.Country;
@@ -35,6 +37,7 @@ public class BrowseActivity extends AppCompatActivity
     {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_mines);
+
         String browsetype = "";
 
         if (savedInstanceState == null) {
@@ -48,17 +51,23 @@ public class BrowseActivity extends AppCompatActivity
             browsetype = (String) savedInstanceState.getSerializable(EXTRA_BROWSETYPE);
         }
 
+        TextView txtfilterInfo = (TextView) findViewById(R.id.filterInfo);
+        ((ViewGroup) txtfilterInfo.getParent()).removeView(txtfilterInfo);
+
         String api_browselisttype = "";
         switch(browsetype)
         {
             case BROWSE_STAGE:
                 api_browselisttype = getResources().getString(R.string.api_stagelist);
+                setTitle (getResources().getString(R.string.title_browse_stage));
                 break;
             case BROWSE_COUNTRY:
                 api_browselisttype = getResources().getString(R.string.api_countrylist);
+                setTitle (getResources().getString(R.string.title_browse_country));
                 break;
             case BROWSE_METAL:
                 api_browselisttype = getResources().getString(R.string.api_metallist);
+                setTitle (getResources().getString(R.string.title_browse_metal));
                 break;
         }
 

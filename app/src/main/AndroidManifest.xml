@@ -49,24 +49,22 @@
 
         <activity
             android:name="com.digiscend.apps.browser.MinesActivity"
-            android:label="@string/title_activity_mines"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_mines">
         </activity>
 
         <activity
             android:name="com.digiscend.apps.browser.BrowseActivity"
-            android:label="@string/title_activity_mines"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_mines">
         </activity>
 
         <activity
             android:name="com.digiscend.apps.browser.AboutActivity"
-            android:label="@string/title_activity_mines"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_mines">
         </activity>
 
 
-        <activity android:name="com.digiscend.apps.browser.ProjectViewActivity">
+        <activity android:name="com.digiscend.apps.browser.ProjectViewActivity"
+                  android:label="@string/title_activity_mines">
         </activity>
     </application>
 

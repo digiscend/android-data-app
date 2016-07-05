@@ -22,5 +22,9 @@
     <string name="about_msg4">Peru : (+51) 959 502 518</string>
     <string name="about_msg5">Landline: +51 1 470 0685</string>
     <string name="about_msg6">Mobile: +51 959502518</string>
+    <string name="title_projectlist">List of Top Projects</string>
+    <string name="title_browse_stage">Browse by Stages</string>
+    <string name="title_browse_country">Browse by Countries</string>
+    <string name="title_browse_metal">Browse by Metals</string>
 
 </resources>

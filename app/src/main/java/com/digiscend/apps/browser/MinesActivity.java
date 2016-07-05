@@ -3,9 +3,12 @@ package com.digiscend.apps.browser;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.digiscend.apps.browser.models.Project;
 import com.digiscend.apps.browser.models.ProjectAdapter;
@@ -14,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 
 public class MinesActivity extends AppCompatActivity
@@ -39,14 +43,25 @@ public class MinesActivity extends AppCompatActivity
             browsetype = (String) savedInstanceState.getSerializable(BrowseActivity.EXTRA_BROWSETYPE);
         }
 
+        ArrayList<String> filterInfoStrings = new ArrayList<String>();
         String filters = "";
         if(browsetype != null)
         {
             String[] ss = browsetype.split ("=");
             filters = "/" + ss[0] + "/" + ss[1];
+
+            filterInfoStrings.add (ss[0] + ": " + ss[1]);
         }
 
-
+        TextView txtfilterInfo = (TextView) findViewById(R.id.filterInfo);
+        if(filterInfoStrings.size ()>0)
+        {
+            String s1 = TextUtils.join (",",filterInfoStrings);
+            txtfilterInfo.setText (s1);
+        }
+        else
+            ((ViewGroup) txtfilterInfo.getParent()).removeView(txtfilterInfo);
+        setTitle (getResources().getString(R.string.title_projectlist));
         // Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
 
         //setSupportActionBar (toolbar);

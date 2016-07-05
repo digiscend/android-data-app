@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -80,4 +82,14 @@ public class ProjectViewActivity extends AppCompatActivity
             e.printStackTrace ();
         }
     }
+
+    // Inflate the menu; this adds items to the action bar if it is present.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu (menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.filters, menu);
+        return true;
+    }
+
 }
