@@ -6,7 +6,7 @@
     <item android:id="@+id/filter_by_stages"
           android:title="@string/menuitem_filter_by_stages"
           android:showAsAction="ifRoom"/>
-    <item android:id="@+id/filter_by_owners"
-          android:title="@string/menuitem_filter_by_owners"
+    <item android:id="@+id/filter_by_countries"
+          android:title="@string/menuitem_filter_by_country"
           android:showAsAction="ifRoom"/>
 </menu>

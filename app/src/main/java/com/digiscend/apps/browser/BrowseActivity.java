@@ -26,8 +26,6 @@ public class BrowseActivity extends AppCompatActivity
 
     public final static String BROWSE_COUNTRY = "country";
 
-    public final static String BROWSE_OWNER = "owner";
-
     public final static String BROWSE_STAGE = "stage";
 
     public final static String BROWSE_METAL = "metal";
@@ -55,7 +53,10 @@ public class BrowseActivity extends AppCompatActivity
         ((ViewGroup) txtfilterInfo.getParent()).removeView(txtfilterInfo);
 
         String api_browselisttype = "";
-        switch(browsetype)
+
+        String[] browsetypelist = browsetype.split (",");
+        String firstbrowsetype = browsetypelist[0];
+        switch(browsetypelist[0])
         {
             case BROWSE_STAGE:
                 api_browselisttype = getResources().getString(R.string.api_stagelist);
@@ -71,17 +72,30 @@ public class BrowseActivity extends AppCompatActivity
                 break;
         }
 
+        ArrayList<String> filterInfoStrings = new ArrayList<String>();
+        String filters = "";
+        for(int i=1; i<browsetypelist.length; i++)
+        {
+            String item2 = browsetypelist[i];
+            String[] ss = item2.split ("=");
+
+            filters += "/" + ss[0] + "/" + ss[1];
+
+            filterInfoStrings.add (ss[0] + ": " + ss[1]);
+        }
+
         try
         {
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
             //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
             String url = getResources().getString(R.string.api_server)
                     + api_browselisttype
+                    + filters
                     + "?lang=" + getResources().getString(R.string.api_q_lang);
 
             String str_result = new ReaderTask ().execute (url).get ();
             BrowserFilter b = null;
-            ArrayList<BrowserFilter> filtervals = b.parseJson(str_result,browsetype);
+            ArrayList<BrowserFilter> filtervals = b.parseJson(str_result,firstbrowsetype);
             setFilterContent(filtervals);
         }
         catch(Exception e)

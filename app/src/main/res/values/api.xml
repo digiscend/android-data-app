@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="api_server">http://192.168.5.2</string>
+    <string name="api_server">https://digiscend.com</string>
     <string name="api_projectlist">/api/projectlist</string>
     <string name="api_countrylist">/api/countries</string>
     <string name="api_stagelist">/api/stages</string>

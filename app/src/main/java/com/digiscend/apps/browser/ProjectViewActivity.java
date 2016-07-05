@@ -53,7 +53,7 @@ public class ProjectViewActivity extends AppCompatActivity
         }
 
         setContentView (R.layout.activity_project_view);
-        TextView tvName = (TextView)findViewById (R.id.projectName);
+        TextView tvName = (TextView)findViewById (R.id.itemName);
         TextView tvCountry = (TextView)findViewById (R.id.countryName);
         TextView tvCompany = (TextView)findViewById (R.id.companyName);
         TextView tvIntro = (TextView)findViewById (R.id.projectIntro);

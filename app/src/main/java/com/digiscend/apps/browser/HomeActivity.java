@@ -31,14 +31,7 @@ public class HomeActivity extends AppCompatActivity
 	public void showBrowseCountry(View view)
 	{
 		Intent intent = new Intent (HomeActivity.this, BrowseActivity.class);
-		//intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_COUNTRY);
-		startActivity(intent);
-	}
-
-	public void showBrowseOwner(View view)
-	{
-		Intent intent = new Intent (HomeActivity.this, BrowseActivity.class);
-		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_OWNER);
+		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_COUNTRY);
 		startActivity(intent);
 	}
 

@@ -17,8 +17,7 @@
         android:text="Large Text"
         android:id="@+id/filterInfo"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/projectName"/>
+        android:layout_alignParentStart="true"/>
 
 
 <ListView

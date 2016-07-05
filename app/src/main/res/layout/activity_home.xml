@@ -28,23 +28,12 @@
         android:layout_margin="10dp"/>
 
     <Button
-        android:id="@+id/browseOwner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="showBrowseOwner"
-        android:text="@string/browse_by_owner_label"
-        android:layout_below="@+id/browseCountry"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="10dp"/>
-
-    <Button
         android:id="@+id/browseMaterial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="showBrowseMaterial"
         android:text="@string/browse_by_material_label"
-        android:layout_below="@+id/browseOwner"
+        android:layout_below="@+id/browseCountry"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"/>
 
