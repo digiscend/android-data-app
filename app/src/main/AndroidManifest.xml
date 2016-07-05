@@ -53,6 +53,11 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
+        <activity
+            android:name="com.digiscend.apps.browser.BrowseActivity"
+            android:label="@string/title_activity_mines"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
 
         <activity android:name="com.digiscend.apps.browser.ProjectViewActivity">
         </activity>

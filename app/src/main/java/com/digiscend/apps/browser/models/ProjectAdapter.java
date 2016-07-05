@@ -30,7 +30,7 @@ public class ProjectAdapter extends ArrayAdapter<Project>
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_listview , parent, false);
         }
         // Lookup view for data population
-        TextView tvName = (TextView) convertView.findViewById(R.id.projectName);
+        TextView tvName = (TextView) convertView.findViewById(R.id.itemName);
         TextView tvCountry = (TextView) convertView.findViewById(R.id.countryName);
         // Populate the data into the template view using the data object
         tvName.setText(project.name);
