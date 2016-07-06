@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.Project;
-import com.digiscend.apps.browser.models.ProjectAdapter;
+import com.digiscend.apps.browser.adapters.ProjectAdapter;
 
 import java.util.ArrayList;
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.BrowserFilter;
-import com.digiscend.apps.browser.models.FilterAdapter;
+import com.digiscend.apps.browser.adapters.FilterAdapter;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.digiscend.apps.browser.models;
+package com.digiscend.apps.browser.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.digiscend.apps.browser.R;
+import com.digiscend.apps.browser.models.BrowserFilter;
 
 import java.util.ArrayList;
 
