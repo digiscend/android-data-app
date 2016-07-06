@@ -25,5 +25,6 @@
     <string name="title_browse_country">Browse by Countries</string>
     <string name="title_browse_metal">Browse by Metals</string>
     <string name="menuitem_filter_by_country">Filter by Country</string>
+    <string name="title_activity_splash">SplashActivity</string>
 
 </resources>

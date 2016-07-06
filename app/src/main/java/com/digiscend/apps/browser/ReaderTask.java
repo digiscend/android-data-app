@@ -1,6 +1,7 @@
 package com.digiscend.apps.browser;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,21 +33,31 @@ class ReaderTask extends AsyncTask<String, Void, String>
     }
 
     protected String doInBackground(String... urls) {
+        String rt="";
         try {
             URL url= new URL(urls[0]);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection ();
+
+
+            int maxStale = 60 * 60 * 24 * 1; // tolerate 4-weeks stale
+            urlConnection.addRequestProperty("Cache-Control", "max-stale=" + maxStale);
+
+            urlConnection.setUseCaches(true);
             InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
 
 
 
-            String rt = readStream (in);
+            rt = readStream (in);
             urlConnection.disconnect();
-            return rt;
 
         } catch (Exception e) {
+
+            Log.i(Constants.LOG_ERROR_URLTASKFAILED,
+                    "OVER ICS: HTTP response cache failed:" + e);
             this.exception = e;
             return null;
         }
+        return rt;
     }
 
 

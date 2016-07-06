@@ -3,8 +3,10 @@ package com.digiscend.apps.browser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
@@ -21,10 +23,16 @@ class ImageTask extends AsyncTask<String, Void, Bitmap>
     protected Bitmap doInBackground(String... args) {
         Bitmap bitmap = null;
         try {
-            bitmap = BitmapFactory.decodeStream((InputStream)new URL (args[0]).getContent());
+
+            URL url = new URL (args[0]);
+            HttpURLConnection connection=(HttpURLConnection)url.openConnection();
+            connection.setUseCaches(true);
+            InputStream input = connection.getInputStream();
+            bitmap = BitmapFactory.decodeStream(input);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.i(Constants.LOG_ERROR_IMAGETASKFAILED,
+                    "OVER ICS: HTTP response cache failed:" + e);
         }
         return bitmap;
     }

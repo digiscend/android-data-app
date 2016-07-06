@@ -1,15 +1,19 @@
 package com.digiscend.apps.browser;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.codepath.oauth.OAuthLoginActionBarActivity;
+import java.io.File;
+import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity
 {
@@ -17,6 +21,30 @@ public class HomeActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+
+		/*ProgressDialog dialog=new ProgressDialog(getBaseContext ());
+		dialog.setMessage("message");
+		dialog.setCancelable(false);
+		dialog.setInverseBackgroundForced(false);
+		dialog.show();*/
+
+		File httpCacheDir = new File (getApplicationContext().getCacheDir()
+				, "http");
+		long httpCacheSize = 10 * 1024 * 1024; // 10 MiB
+
+        HttpResponseCache cache = HttpResponseCache.getInstalled();
+        if (cache == null)
+        {
+            try
+            {
+                cache = HttpResponseCache.install (httpCacheDir, httpCacheSize);
+            } catch (IOException e)
+            {
+                Log.i (Constants.LOG_ERROR_CACHEINSTALLFAILED,
+                        "OVER ICS: HTTP response cache failed:" + e);
+            }
+        }
+
 	}
 
 	// Inflate the menu; this adds items to the action bar if it is present.

@@ -1,5 +1,6 @@
 package com.digiscend.apps.browser;
 
+import android.app.Application;
 import android.content.Context;
 
 /*
@@ -11,16 +12,13 @@ import android.content.Context;
  *     // use client to send requests to API
  *
  */
-public class BrowserApplication extends com.activeandroid.app.Application {
+public class BrowserApplication extends Application
+{
 	private static Context context;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		BrowserApplication.context = this;
-	}
-
-	public static RestClient getRestClient() {
-		return (RestClient) RestClient.getInstance(RestClient.class, BrowserApplication.context);
 	}
 }

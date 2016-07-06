@@ -1,0 +1,2 @@
+-keep class android.support.v4.** { *; }
+-dontnote android.support.v4.**

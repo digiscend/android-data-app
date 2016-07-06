@@ -6,13 +6,14 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".BrowserApplication"
         android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="RestClient.db"/>
@@ -24,13 +25,11 @@
             android:name=".HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -41,29 +40,32 @@
                     android:host="cprest"
                     android:scheme="oauth"/>
             </intent-filter>
-
         </activity>
-
         <activity
-            android:name="com.digiscend.apps.browser.MinesActivity"
+            android:name=".MinesActivity"
             android:label="@string/title_activity_mines">
         </activity>
-
         <activity
-            android:name="com.digiscend.apps.browser.BrowseActivity"
+            android:name=".BrowseActivity"
             android:label="@string/title_activity_mines">
         </activity>
-
         <activity
-            android:name="com.digiscend.apps.browser.AboutActivity"
+            android:name=".AboutActivity"
             android:label="@string/title_activity_mines">
         </activity>
-
-
-        <activity android:name="com.digiscend.apps.browser.ProjectViewActivity"
-                  android:label="@string/title_activity_mines">
+        <activity
+            android:name=".ProjectViewActivity"
+            android:label="@string/title_activity_mines">
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_splash"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.digiscend.apps.browser.HomeActivity"/>
         </activity>
     </application>
-
 
 </manifest>
