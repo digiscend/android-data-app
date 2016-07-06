@@ -31,8 +31,8 @@ public class HomeActivity extends AppCompatActivity
 		dialog.setInverseBackgroundForced(false);
 		dialog.show();*/
 
-        PreloadingTask pre =new PreloadingTask (this);
-        pre.execute ();
+        //PreloadingTask pre =new PreloadingTask (this);
+        //pre.execute ();
 
         File httpCacheDir = new File (getApplicationContext().getCacheDir()
 				, "http");

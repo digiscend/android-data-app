@@ -1,8 +1,12 @@
 package com.digiscend.apps.browser.Task;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.digiscend.apps.browser.Activity.HomeActivity;
+import com.digiscend.apps.browser.Activity.SplashActivity;
 import com.digiscend.apps.browser.models.Constants;
 
 import java.io.BufferedInputStream;
@@ -19,6 +23,16 @@ public class ReaderTask extends AsyncTask<String, Void, String>
 {
 
     private Exception exception;
+    private Activity caller=null;
+
+    public ReaderTask(Activity splashActivity)
+    {
+        caller=splashActivity;
+    }
+
+    public ReaderTask()
+    {
+    }
 
     private String readStream(InputStream is) {
         try {
@@ -37,20 +51,20 @@ public class ReaderTask extends AsyncTask<String, Void, String>
     protected String doInBackground(String... urls) {
         String rt="";
         try {
-            URL url= new URL(urls[0]);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection ();
+            for(int i=0; i<urls.length; i++)
+            {
+                URL url = new URL (urls[i]);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection ();
 
+                int maxStale = 60 * 60 * 24 * 1; // tolerate 4-weeks stale
+                urlConnection.addRequestProperty ("Cache-Control", "max-stale=" + maxStale);
 
-            int maxStale = 60 * 60 * 24 * 1; // tolerate 4-weeks stale
-            urlConnection.addRequestProperty("Cache-Control", "max-stale=" + maxStale);
+                urlConnection.setUseCaches (true);
+                InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
 
-            urlConnection.setUseCaches(true);
-            InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
-
-
-
-            rt = readStream (in);
-            urlConnection.disconnect();
+                rt = readStream (in);
+                urlConnection.disconnect();
+            }
 
         } catch (Exception e) {
 
@@ -60,6 +74,17 @@ public class ReaderTask extends AsyncTask<String, Void, String>
             return null;
         }
         return rt;
+    }
+
+    @Override
+    public void onPostExecute (String result)
+    {
+        if(caller != null)
+        {
+            Intent mainIntent = new Intent(caller,HomeActivity.class);
+            caller.startActivity(mainIntent);
+            caller.finish();
+        }
     }
 
 

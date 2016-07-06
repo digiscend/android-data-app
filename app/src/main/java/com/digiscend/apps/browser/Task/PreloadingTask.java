@@ -1,9 +1,13 @@
 package com.digiscend.apps.browser.Task;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.digiscend.apps.browser.Activity.BrowseActivity;
 import com.digiscend.apps.browser.Activity.HomeActivity;
+import com.digiscend.apps.browser.Activity.SplashActivity;
 import com.digiscend.apps.browser.R;
 
 /**
@@ -12,9 +16,9 @@ import com.digiscend.apps.browser.R;
 public class PreloadingTask extends AsyncTask<Void, Integer, Void>
 {
     private ProgressDialog progressDialog;
-    private HomeActivity hA;
+    private Activity hA;
 
-    public PreloadingTask(HomeActivity hA)
+    public PreloadingTask(Activity hA)
     {
         this.hA = hA;
     }
@@ -22,24 +26,8 @@ public class PreloadingTask extends AsyncTask<Void, Integer, Void>
     @Override
     protected void onPreExecute()
     {
-        //Create a new progress dialog
-        progressDialog = new ProgressDialog (hA);
-        //Set the progress dialog to display a horizontal progress bar
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        //Set the dialog title to 'Loading...'
-        progressDialog.setTitle("Loading...");
-        //Set the dialog message to 'Loading application View, please wait...'
-        progressDialog.setMessage("Loading application View, please wait...");
-        //This dialog can't be canceled by pressing the back key
-        progressDialog.setCancelable(false);
-        //This dialog isn't indeterminate
-        progressDialog.setIndeterminate(false);
-        //The maximum number of items is 100
-        progressDialog.setMax(100);
-        //Set the current progress to zero
-        progressDialog.setProgress(0);
-        //Display the progress dialog
-        progressDialog.show();
+        Intent intent = new Intent (hA, SplashActivity.class);
+        hA.startActivity(intent);
     }
 
     //The code to be executed in a background thread.
@@ -51,30 +39,7 @@ public class PreloadingTask extends AsyncTask<Void, Integer, Void>
              * is where the code that is going to be executed on a background
              * thread must be placed.
              */
-        try
-        {
-            //Get the current thread's token
-            synchronized (this)
-            {
-                //Initialize an integer (that will act as a counter) to zero
-                int counter = 0;
-                //While the counter is smaller than four
-                while(counter <= 4)
-                {
-                    //Wait 850 milliseconds
-                    this.wait(850);
-                    //Increment the counter
-                    counter++;
-                    //Set the current progress.
-                    //This value is going to be passed to the onProgressUpdate() method.
-                    publishProgress(counter*25);
-                }
-            }
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+
         return null;
     }
 
@@ -83,7 +48,7 @@ public class PreloadingTask extends AsyncTask<Void, Integer, Void>
     protected void onProgressUpdate(Integer... values)
     {
         //set the current progress of the progress dialog
-        progressDialog.setProgress(values[0]);
+        //progressDialog.setProgress(values[0]);
     }
 
     //after executing the code in the thread
@@ -91,8 +56,11 @@ public class PreloadingTask extends AsyncTask<Void, Integer, Void>
     protected void onPostExecute(Void result)
     {
         //close the progress dialog
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         //initialize the View
-        hA.setContentView(R.layout.activity_home);
+        Intent mainIntent = new Intent(hA,HomeActivity.class);
+        hA.startActivity(mainIntent);
+        hA.finish();
+
     }
 }
