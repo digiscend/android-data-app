@@ -1,17 +1,14 @@
-package com.digiscend.apps.browser;
+package com.digiscend.apps.browser.Activity;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.digiscend.apps.browser.R;
+import com.digiscend.apps.browser.Task.ImageTask;
 
 import java.util.concurrent.ExecutionException;
 

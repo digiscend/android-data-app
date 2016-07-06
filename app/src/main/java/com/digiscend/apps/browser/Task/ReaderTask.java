@@ -1,7 +1,9 @@
-package com.digiscend.apps.browser;
+package com.digiscend.apps.browser.Task;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.digiscend.apps.browser.models.Constants;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,7 +15,7 @@ import java.net.URL;
 /**
  * Created by vikas on 03/07/16.
  */
-class ReaderTask extends AsyncTask<String, Void, String>
+public class ReaderTask extends AsyncTask<String, Void, String>
 {
 
     private Exception exception;

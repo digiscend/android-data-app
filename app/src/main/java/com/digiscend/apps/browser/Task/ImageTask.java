@@ -1,9 +1,11 @@
-package com.digiscend.apps.browser;
+package com.digiscend.apps.browser.Task;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.digiscend.apps.browser.models.Constants;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -12,7 +14,7 @@ import java.net.URL;
 /**
  * Created by vikas on 04/07/16.
  */
-class ImageTask extends AsyncTask<String, Void, Bitmap>
+public class ImageTask extends AsyncTask<String, Void, Bitmap>
 {
     @Override
     protected void onPreExecute() {

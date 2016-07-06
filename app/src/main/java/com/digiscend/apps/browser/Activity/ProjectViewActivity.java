@@ -1,4 +1,4 @@
-package com.digiscend.apps.browser;
+package com.digiscend.apps.browser.Activity;
 
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,9 @@ import android.view.MenuInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.digiscend.apps.browser.R;
+import com.digiscend.apps.browser.Task.ImageTask;
+import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.Project;
 
 import java.util.ArrayList;

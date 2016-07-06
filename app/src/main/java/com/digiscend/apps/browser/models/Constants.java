@@ -1,4 +1,4 @@
-package com.digiscend.apps.browser;
+package com.digiscend.apps.browser.models;
 
 /**
  * Created by vikas on 06/07/16.

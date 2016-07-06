@@ -1,6 +1,5 @@
-package com.digiscend.apps.browser;
+package com.digiscend.apps.browser.Activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
@@ -11,6 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.digiscend.apps.browser.R;
+import com.digiscend.apps.browser.Task.PreloadingTask;
+import com.digiscend.apps.browser.models.Constants;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +31,10 @@ public class HomeActivity extends AppCompatActivity
 		dialog.setInverseBackgroundForced(false);
 		dialog.show();*/
 
-		File httpCacheDir = new File (getApplicationContext().getCacheDir()
+        PreloadingTask pre =new PreloadingTask (this);
+        pre.execute ();
+
+        File httpCacheDir = new File (getApplicationContext().getCacheDir()
 				, "http");
 		long httpCacheSize = 10 * 1024 * 1024; // 10 MiB
 

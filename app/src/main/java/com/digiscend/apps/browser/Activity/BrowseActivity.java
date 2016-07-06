@@ -1,6 +1,5 @@
-package com.digiscend.apps.browser;
+package com.digiscend.apps.browser.Activity;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.digiscend.apps.browser.R;
+import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.BrowserFilter;
-import com.digiscend.apps.browser.models.Country;
 import com.digiscend.apps.browser.models.FilterAdapter;
-import com.digiscend.apps.browser.models.Project;
 
 import java.util.ArrayList;
 

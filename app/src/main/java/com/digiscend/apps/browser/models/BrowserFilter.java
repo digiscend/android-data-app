@@ -1,6 +1,6 @@
 package com.digiscend.apps.browser.models;
 
-import com.digiscend.apps.browser.BrowseActivity;
+import com.digiscend.apps.browser.Activity.BrowseActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

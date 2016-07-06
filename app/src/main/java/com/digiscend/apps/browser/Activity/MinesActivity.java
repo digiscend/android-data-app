@@ -1,4 +1,4 @@
-package com.digiscend.apps.browser;
+package com.digiscend.apps.browser.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +13,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.digiscend.apps.browser.R;
+import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.Project;
 import com.digiscend.apps.browser.models.ProjectAdapter;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.StringJoiner;
 
 
 public class MinesActivity extends AppCompatActivity
