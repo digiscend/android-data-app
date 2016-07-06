@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Digiscend Projects Browser</string>
+    <string name="app_name">Digiscend</string>
     <string name="login_label">Log in</string>
     <string name="button2_label">Button Two</string>
     <string name="Mines_Activity_Title">Mines Activity Title</string>

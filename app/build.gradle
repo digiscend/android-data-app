@@ -13,7 +13,7 @@ android {
     buildToolsVersion "24.0.0"
     defaultConfig {
         applicationId 'com.digiscend.apps.browser'
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 15
         signingConfig signingConfigs.config
     }

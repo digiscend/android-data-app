@@ -24,23 +24,6 @@ public class AboutActivity extends AppCompatActivity
 		HttpResponseCache cache = HttpResponseCache.getInstalled();
 		if(cache != null)
 		cinfo.setText ("Size:" + (cache.size ()/1024) + ",ctr1=" + cache.getRequestCount ()+",ctr2=" + cache.getNetworkCount ()+",ctr3="+cache.getHitCount ());
-
-		String url = "";
-		try
-		{
-			url = "https://digiscend.com/images/digiscend-logo.png";
-			Bitmap bitmap = new ImageTask ().execute (url).get ();
-			ImageView iview = (ImageView)findViewById (R.id.imageView);
-			iview.setImageBitmap (bitmap);
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace ();
-		}
-		catch (ExecutionException e)
-		{
-			e.printStackTrace ();
-		}
 	}
 
 }

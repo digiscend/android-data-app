@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.digiscend.apps.browser.R;
@@ -24,19 +26,9 @@ public class SplashActivity extends AppCompatActivity
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_splash);
 
-        try
-        {
-            String url = "https://digiscend.com/images/digiscend-logo.png";
-            Bitmap bitmap = new ImageTask ().execute (url).get ();
-            ImageView iview = (ImageView) findViewById (R.id.imageView);
-            iview.setImageBitmap (bitmap);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace ();
-        } catch (ExecutionException e)
-        {
-            e.printStackTrace ();
-        }
+        ImageView myImageView= (ImageView)findViewById(R.id.imageView);
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.splash);
+        myImageView.startAnimation(myFadeInAnimation);
     }
 
     @Override
