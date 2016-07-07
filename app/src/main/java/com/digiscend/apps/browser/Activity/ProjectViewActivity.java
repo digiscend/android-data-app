@@ -31,6 +31,7 @@ public class ProjectViewActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_project_view);
 
         String newString;
         String projectid = "";
@@ -62,7 +63,7 @@ public class ProjectViewActivity extends AppCompatActivity
             e.printStackTrace ();
         }
 
-        setContentView (R.layout.activity_project_view);
+
         TextView tvName = (TextView)findViewById (R.id.itemName);
         TextView tvCountry = (TextView)findViewById (R.id.countryName);
         TextView tvCompany = (TextView)findViewById (R.id.companyName);
