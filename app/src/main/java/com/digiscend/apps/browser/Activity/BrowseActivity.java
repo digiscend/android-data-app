@@ -3,6 +3,7 @@ package com.digiscend.apps.browser.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.BrowserFilter;
 import com.digiscend.apps.browser.adapters.FilterAdapter;
+import com.digiscend.apps.browser.models.Constants;
 
 import java.util.ArrayList;
 
@@ -29,13 +31,16 @@ public class BrowseActivity extends AppCompatActivity
 
     public final static String BROWSE_METAL = "metal";
 
+    public String browsetype = "";
+    public String filters = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_mines);
 
-        String browsetype = "";
+
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -72,7 +77,7 @@ public class BrowseActivity extends AppCompatActivity
         }
 
         ArrayList<String> filterInfoStrings = new ArrayList<String>();
-        String filters = "";
+
         for(int i=1; i<browsetypelist.length; i++)
         {
             String item2 = browsetypelist[i];
@@ -87,7 +92,7 @@ public class BrowseActivity extends AppCompatActivity
 
             filterInfoStrings.add (ss[0] + ": " + ss[1]);
         }
-
+        Log.v(Constants.LOG_BWFILTER,filters);
         try
         {
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
@@ -96,7 +101,7 @@ public class BrowseActivity extends AppCompatActivity
                     + api_browselisttype
                     + filters
                     + "?lang=" + getResources().getString(R.string.api_q_lang);
-
+            Log.v(Constants.LOG_BWURL,url);
             String str_result = new ReaderTask ().execute (url).get ();
             BrowserFilter b = null;
             ArrayList<BrowserFilter> filtervals = b.parseJson(str_result,firstbrowsetype);
@@ -127,7 +132,14 @@ public class BrowseActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
+
                 BrowserFilter val= (BrowserFilter) parent.getAdapter().getItem(position);
+                String[] lastbrowsetypelist = browsetype.split (",");
+                if(lastbrowsetypelist.length>1)
+                {
+                    for (int i = 1; i < lastbrowsetypelist.length; i++)
+                        val.lastbrowsetype = lastbrowsetypelist[i] + "," + val.lastbrowsetype;
+                }
                 Intent intent = new Intent(getBaseContext (), MinesActivity.class);
                 intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, val.withLastBrowseType());
                 startActivity(intent);

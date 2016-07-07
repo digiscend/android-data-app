@@ -1,9 +1,11 @@
 package com.digiscend.apps.browser.Activity;
 
 import android.content.Intent;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,10 +17,12 @@ import android.widget.TextView;
 
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ReaderTask;
+import com.digiscend.apps.browser.models.Constants;
 import com.digiscend.apps.browser.models.Project;
 import com.digiscend.apps.browser.adapters.ProjectAdapter;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class MinesActivity extends AppCompatActivity
@@ -50,16 +54,33 @@ public class MinesActivity extends AppCompatActivity
         String filters = "";
         if(browsetype != null)
         {
-            String[] ss = browsetype.split ("=");
-            filters = "/" + ss[0] + "/" + ss[1];
 
-            filterInfoStrings.add (ss[0] + ": " + ss[1]);
+            String[] browsetypelist = browsetype.split (",");
+            for (int i = 0; i < browsetypelist.length; i++)
+            {
+                String item2 = browsetypelist[i];
+                if (item2 == "null")
+                    break;
+
+                String[] ss = item2.split ("=");
+                if (ss.length != 2)
+                    break;
+
+                filters += "/" + ss[0] + "/" + ss[1];
+
+                String  title = toSentenceCase(ss[0]);
+
+                filterInfoStrings.add (title + ": " + ss[1]);
+            }
         }
+        Log.v(Constants.LOG_BWFILTER,filters);
 
+
+        Log.v(Constants.LOG_PLFILTER,filters);
         TextView txtfilterInfo = (TextView) findViewById(R.id.filterInfo);
         if(filterInfoStrings.size ()>0)
         {
-            String s1 = TextUtils.join (",",filterInfoStrings);
+            String s1 = TextUtils.join ("\n",filterInfoStrings);
             txtfilterInfo.setText (s1);
         }
         else
@@ -75,6 +96,7 @@ public class MinesActivity extends AppCompatActivity
             //new ReaderTask().execute("http://gateway.local/site/helloservice");
             //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
             String url = getResources ().getString (R.string.api_server) + getResources ().getString (R.string.api_projectlist) + filters + "?lang=" + getResources ().getString (R.string.api_q_lang);
+            Log.v(Constants.LOG_PLURL,url);
             String str_result = new ReaderTask ().execute (url).get ();
             Project p = null;
             ArrayList<Project> projects = p.parseJson (str_result);
@@ -119,20 +141,29 @@ public class MinesActivity extends AppCompatActivity
         super.onCreateOptionsMenu (menu);
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.filters, menu);
+
         if(browsetype != null)
         {
-            String[] ss = browsetype.split ("=");
-            switch(ss[0])
+            String[] browsetypelist = browsetype.split (",");
+            for (int i = 0; i < browsetypelist.length; i++)
             {
-                case BrowseActivity.BROWSE_COUNTRY:
-                    menu.findItem(R.id.filter_by_countries).setVisible(false);
+                String item2 = browsetypelist[i];
+                if (item2 == "null")
                     break;
-                case BrowseActivity.BROWSE_STAGE:
-                    menu.findItem(R.id.filter_by_stages).setVisible(false);
-                    break;
-                case BrowseActivity.BROWSE_METAL:
-                    menu.findItem(R.id.filter_by_metals).setVisible(false);
-                    break;
+
+                String[] ss = item2.split ("=");
+                switch(ss[0])
+                {
+                    case BrowseActivity.BROWSE_COUNTRY:
+                        menu.findItem(R.id.filter_by_countries).setVisible(false);
+                        break;
+                    case BrowseActivity.BROWSE_STAGE:
+                        menu.findItem(R.id.filter_by_stages).setVisible(false);
+                        break;
+                    case BrowseActivity.BROWSE_METAL:
+                        menu.findItem(R.id.filter_by_metals).setVisible(false);
+                        break;
+                }
             }
         }
 
@@ -143,9 +174,12 @@ public class MinesActivity extends AppCompatActivity
     {
         Intent intent = new Intent (this, BrowseActivity.class);
         if(browsetype != null)
+        {
             browsetype = "," + browsetype;
+        }
         else
             browsetype = "";
+
 
         switch(itemId)
         {
@@ -160,6 +194,40 @@ public class MinesActivity extends AppCompatActivity
                 break;
         }
         startActivity(intent);
+    }
+
+    public static String toSentenceCase(String inputString) {
+        String result = "";
+        if (inputString.length() == 0) {
+            return result;
+        }
+        char firstChar = inputString.charAt(0);
+        char firstCharToUpperCase = Character.toUpperCase(firstChar);
+        result = result + firstCharToUpperCase;
+        boolean terminalCharacterEncountered = false;
+        char[] terminalCharacters = {'.', '?', '!'};
+        for (int i = 1; i < inputString.length(); i++) {
+            char currentChar = inputString.charAt(i);
+            if (terminalCharacterEncountered) {
+                if (currentChar == ' ') {
+                    result = result + currentChar;
+                } else {
+                    char currentCharToUpperCase = Character.toUpperCase(currentChar);
+                    result = result + currentCharToUpperCase;
+                    terminalCharacterEncountered = false;
+                }
+            } else {
+                char currentCharToLowerCase = Character.toLowerCase(currentChar);
+                result = result + currentCharToLowerCase;
+            }
+            for (int j = 0; j < terminalCharacters.length; j++) {
+                if (currentChar == terminalCharacters[j]) {
+                    terminalCharacterEncountered = true;
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
 }
