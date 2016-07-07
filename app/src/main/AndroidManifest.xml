@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.digiscend.apps.browser"
-          android:versionCode="2"
+          android:versionCode="3"
           android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -19,7 +19,7 @@
             android:value="RestClient.db"/>
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1"/>
+            android:value="1"/>-
 
         <activity
             android:name=".Activity.HomeActivity"

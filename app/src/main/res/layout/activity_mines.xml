@@ -9,7 +9,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                   tools:context=".Activity.BrowseActivity" >
-
+    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,14 +17,16 @@
         android:text="Large Text"
         android:id="@+id/filterInfo"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"/>
 
 
 <ListView
     android:id="@+id/project_list"
     android:layout_width="match_parent"
     android:layout_below="@+id/filterInfo"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
 </ListView>
 
 </RelativeLayout>

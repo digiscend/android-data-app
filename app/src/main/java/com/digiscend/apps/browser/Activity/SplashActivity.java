@@ -26,9 +26,7 @@ public class SplashActivity extends AppCompatActivity
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_splash);
 
-        ImageView myImageView= (ImageView)findViewById(R.id.imageView);
-        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.splash);
-        myImageView.startAnimation(myFadeInAnimation);
+
     }
 
     @Override
@@ -59,5 +57,9 @@ public class SplashActivity extends AppCompatActivity
         {
             e.printStackTrace ();
         }
+
+        ImageView myImageView= (ImageView)findViewById(R.id.imageView);
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.splash);
+        myImageView.startAnimation(myFadeInAnimation);
     }
 }

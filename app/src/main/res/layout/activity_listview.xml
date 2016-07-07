@@ -12,7 +12,8 @@
         android:text="Large Text"
         android:id="@+id/itemName"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:layout_width="wrap_content"

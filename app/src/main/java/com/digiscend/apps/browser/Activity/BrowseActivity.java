@@ -49,7 +49,7 @@ public class BrowseActivity extends AppCompatActivity
         }
 
         TextView txtfilterInfo = (TextView) findViewById(R.id.filterInfo);
-        ((ViewGroup) txtfilterInfo.getParent()).removeView(txtfilterInfo);
+        txtfilterInfo.setText ("");
 
         String api_browselisttype = "";
 
@@ -76,7 +76,12 @@ public class BrowseActivity extends AppCompatActivity
         for(int i=1; i<browsetypelist.length; i++)
         {
             String item2 = browsetypelist[i];
+            if(item2 == "null")
+                break;
+
             String[] ss = item2.split ("=");
+            if(ss.length != 2)
+                break;
 
             filters += "/" + ss[0] + "/" + ss[1];
 

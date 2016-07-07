@@ -15,36 +15,44 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:onClick="showTopProjects"
-        android:text="@string/top_projects_label" />
+        android:text="@string/top_projects_label"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="#ffffff"/>
 
     <Button
         android:id="@+id/browseCountry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="showBrowseCountry"
-        android:text="@string/browse_by_country_label"
+        android:text="@string/title_browse_country"
         android:layout_below="@+id/topprojects"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="#ffffff"/>
 
     <Button
         android:id="@+id/browseMaterial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="showBrowseMaterial"
-        android:text="@string/browse_by_material_label"
+        android:text="@string/title_browse_metal"
         android:layout_below="@+id/browseCountry"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="#ffffff"/>
 
     <Button
         android:id="@+id/browseStage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="showBrowseStage"
-        android:text="@string/browse_by_stage_label"
+        android:text="@string/title_browse_stage"
         android:layout_below="@+id/browseMaterial"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="#ffffff"/>
 
 </RelativeLayout>

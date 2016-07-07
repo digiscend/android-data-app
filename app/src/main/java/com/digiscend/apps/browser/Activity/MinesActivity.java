@@ -63,7 +63,8 @@ public class MinesActivity extends AppCompatActivity
             txtfilterInfo.setText (s1);
         }
         else
-            ((ViewGroup) txtfilterInfo.getParent()).removeView(txtfilterInfo);
+            txtfilterInfo.setText ("");
+
         setTitle (getResources().getString(R.string.title_projectlist));
         // Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
 
@@ -118,7 +119,6 @@ public class MinesActivity extends AppCompatActivity
         super.onCreateOptionsMenu (menu);
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.filters, menu);
-
         if(browsetype != null)
         {
             String[] ss = browsetype.split ("=");
@@ -142,18 +142,24 @@ public class MinesActivity extends AppCompatActivity
     private void onFilterPresssed(int itemId)
     {
         Intent intent = new Intent (this, BrowseActivity.class);
+        if(browsetype != null)
+            browsetype = "," + browsetype;
+        else
+            browsetype = "";
+
         switch(itemId)
         {
             case R.id.filter_by_countries:
-                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_COUNTRY + "," + browsetype);
+                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_COUNTRY + browsetype);
                 break;
             case R.id.filter_by_metals:
-                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_METAL + "," + browsetype);
+                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_METAL + browsetype);
                 break;
             case R.id.filter_by_stages:
-                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_STAGE + "," + browsetype);
+                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_STAGE + browsetype);
                 break;
         }
         startActivity(intent);
     }
+
 }
