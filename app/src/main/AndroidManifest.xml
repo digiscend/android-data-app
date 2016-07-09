@@ -55,6 +55,16 @@
         </activity>
 
         <activity
+            android:name=".Activity.ProjectViewMilestonesActivity"
+            android:label="@string/title_activity_milestones"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Activity.ProjectViewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.digiscend.apps.browser.Activity.ProjectViewActivity"/>
+        </activity>
+
+        <activity
             android:name=".Activity.SplashActivity"
             android:label="@string/app_name"
             android:parentActivityName=".Activity.HomeActivity"
@@ -74,16 +84,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".Activity.ProjectViewMilestonesActivity"
-            android:label="@string/title_activity_milestones"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".Activity.ProjectViewActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.digiscend.apps.browser.Activity.ProjectViewActivity"/>
         </activity>
 
     </application>
