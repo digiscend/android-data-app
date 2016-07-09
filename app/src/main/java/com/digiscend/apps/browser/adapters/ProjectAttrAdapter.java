@@ -29,26 +29,18 @@ public class ProjectAttrAdapter extends ArrayAdapter<Project>
         Project project = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_listview , parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listitem_milestone_view, parent, false);
         }
+
+        if(project == null)
+            return convertView;
+
         // Lookup view for data population
         TextView tvName = (TextView) convertView.findViewById(R.id.itemName);
-        TextView tvCountry = (TextView) convertView.findViewById(R.id.countryName);
+        TextView tvYear = (TextView) convertView.findViewById(R.id.textYear);
         // Populate the data into the template view using the data object
         tvName.setText(project.name);
-        tvCountry.setText(project.country);
-        //tvId.setText(project.id);
-        // Return the completed view to render on screen
-
-        /*convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext (), ProjectViewActivity.class);
-                String message = "abc";
-                getContext ().startActivity (intent);
-            }
-        });*/
-
+        tvYear.setText(project.year);
         return convertView;
     }
 }

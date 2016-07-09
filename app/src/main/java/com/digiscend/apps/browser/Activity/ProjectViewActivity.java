@@ -13,8 +13,6 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -91,7 +89,7 @@ public class ProjectViewActivity extends AppCompatActivity
         }
 
 
-        TextView tvName = (TextView)findViewById (R.id.itemName);
+        TextView tvName = (TextView)findViewById (R.id.textYear);
         TextView tvCountry = (TextView)findViewById (R.id.countryName);
         TextView tvCompany = (TextView)findViewById (R.id.companyName);
         TextView tvIntro = (TextView)findViewById (R.id.projectIntro);

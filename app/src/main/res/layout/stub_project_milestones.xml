@@ -13,4 +13,10 @@
     tools:context="com.digiscend.apps.browser.Activity.ProjectViewMilestonesActivity"
     tools:showIn="@layout/activity_project_view_milestones">
 
+    <ListView
+        android:id="@+id/attr_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
 </RelativeLayout>

@@ -27,9 +27,9 @@ public class FilterAdapter extends ArrayAdapter<BrowserFilter>
     public View getView(int position, View convertView, ViewGroup parent) {
         BrowserFilter filter = getItem(position);
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_listview , parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listitem_mines_view, parent, false);
         }
-        TextView tvName = (TextView) convertView.findViewById(R.id.itemName);
+        TextView tvName = (TextView) convertView.findViewById(R.id.textYear);
         tvName.setText(filter.name);
         return convertView;
     }

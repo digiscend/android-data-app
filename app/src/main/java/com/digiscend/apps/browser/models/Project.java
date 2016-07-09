@@ -18,6 +18,7 @@ public class Project implements Serializable
     public String country;
     public Company company = null;
     public String intro;
+    public String year;
 
     public ArrayList<Project> milestoneProjects =
             new ArrayList<Project>();
@@ -81,6 +82,11 @@ public class Project implements Serializable
             obj.htmlid = jProject.getString ("htmlid");
             obj.country = jProject.getString ("countryName");
             obj.intro = jProject.getString ("intro");
+
+            if(jProject.has("year"))
+                obj.year = jProject.getString ("year");
+
+
 
             if(jProject.has ("selectedCompany"))
             {
