@@ -14,4 +14,5 @@ public class Constants
     public static final String LOG_BWFILTER = "BW-FILTER";
     public static final String LOG_PLURL = "PL-URL";
     public static final String LOG_BWURL = "BW-URL";
+    public static final String ACTIVE_PROJECT_OBJECT = "AP";
 }

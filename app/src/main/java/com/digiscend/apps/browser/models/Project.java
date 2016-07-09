@@ -3,13 +3,14 @@ package com.digiscend.apps.browser.models;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by vikas on 03/07/16.
  */
-public class Project
+public class Project implements Serializable
 {
     public String htmlid;
     public String name;
@@ -17,6 +18,10 @@ public class Project
     public String country;
     public Company company = null;
     public String intro;
+
+    public ArrayList<Project> milestoneProjects =
+            new ArrayList<Project>();
+
     public Project() {
 
     }
@@ -81,6 +86,20 @@ public class Project
             {
                 Company c = null;
                 obj.company = c.parseJsonObject(jProject.getJSONObject ("selectedCompany"));
+            }
+
+            if(jProject.has ("milestoneProjects"))
+            {
+                JSONArray jProjects2 = jProject.getJSONArray ("milestoneProjects");
+
+                for (int i = 0; i < jProjects2.length (); i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String> ();
+                    JSONObject jsonProject = jProjects2.getJSONObject (i);
+
+                    Project p = parseJsonObject (jsonProject);
+                    obj.milestoneProjects.add (p);
+                }
             }
         }
         catch(Exception e)

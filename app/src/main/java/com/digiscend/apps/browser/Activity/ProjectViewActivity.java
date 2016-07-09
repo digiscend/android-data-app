@@ -1,5 +1,6 @@
 package com.digiscend.apps.browser.Activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,12 +13,16 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ImageTask;
 import com.digiscend.apps.browser.Task.ReaderTask;
+import com.digiscend.apps.browser.models.Constants;
 import com.digiscend.apps.browser.models.Project;
 
 import java.util.ArrayList;
@@ -27,11 +32,33 @@ public class ProjectViewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
 
+    Project currentProject;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_project_view);
+
+        Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
+        if(toolbar!=null)
+            setSupportActionBar (toolbar);
+
+        ViewStub stub = (ViewStub) findViewById(R.id.stub);
+        stub.setLayoutResource(R.layout.stub_project_properties);
+        stub.inflate();
+
+        //ViewGroup.LayoutParams lp2 = getLayoutParams();
+        //ViewGroup.LayoutParams lp = stub.getLayoutParams();
+        //lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+        //int h = lp.height;
+        //int h2= lp2.height;
+
+        //stub.setLayoutParams(lp);
+
+        //stub.setMinimumHeight (h - h2);
+
 
         String newString;
         String projectid = "";
@@ -69,17 +96,20 @@ public class ProjectViewActivity extends AppCompatActivity
         TextView tvCompany = (TextView)findViewById (R.id.companyName);
         TextView tvIntro = (TextView)findViewById (R.id.projectIntro);
 
-        setTitle(projects.get (0).name);
-        tvCountry.setText (projects.get (0).country);
-        tvIntro.setText (Html.fromHtml (projects.get (0).intro));
-        if(projects.get (0).company != null)
+        currentProject = projects.get (0);
+
+        setTitle(currentProject.name);
+        tvCountry.setText (currentProject.country);
+        if(tvIntro != null)
+            tvIntro.setText (Html.fromHtml (currentProject.intro));
+        if(currentProject.company != null)
             tvCompany.setText (projects.get (0).company.name);
 
         String url = null;
 
         try
         {
-            url = getResources().getString(R.string.api_server) + projects.get (0).company.logosrc;
+            url = getResources().getString(R.string.api_server) + currentProject.company.logosrc;
             Bitmap bitmap = new ImageTask ().execute (url).get ();
             ImageView iview = (ImageView)findViewById (R.id.companyLogo);
             iview.setImageBitmap (bitmap);
@@ -92,10 +122,6 @@ public class ProjectViewActivity extends AppCompatActivity
         {
             e.printStackTrace ();
         }
-
-        Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
-        if(toolbar!=null)
-            setSupportActionBar (toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById (R.id.project_view_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle (
@@ -127,13 +153,22 @@ public class ProjectViewActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId ();
 
-        if (id == R.id.nav_camera)
+        if (id == R.id.nav_milestones)
         {
-            // Handle the camera action
-        }  if (id == R.id.nav_share)
+            Intent intent = new Intent(this, ProjectViewMilestonesActivity.class);
+            intent.putExtra(Constants.ACTIVE_PROJECT_OBJECT, currentProject);
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_properties)
+        {
+            Intent intent = new Intent(this, ProjectAttrsActivity.class);
+            intent.putExtra(Constants.ACTIVE_PROJECT_OBJECT, currentProject);
+            startActivity(intent);
+        }
+        /*if (id == R.id.nav_share)
         {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById (R.id.project_view_layout);
         drawer.closeDrawer (GravityCompat.START);

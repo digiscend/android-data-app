@@ -13,6 +13,7 @@ import com.digiscend.apps.browser.models.BrowserFilter;
 import java.util.ArrayList;
 
 /**
+ * This adapter just picks items like metals, countries and stages and shows in the list
  * Created by vikas on 04/07/16.
  * @see https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
  */

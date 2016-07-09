@@ -17,9 +17,9 @@ import java.util.ArrayList;
  * Created by vikas on 04/07/16.
  * @see https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
  */
-public class ProjectAdapter extends ArrayAdapter<Project>
+public class ProjectAttrAdapter extends ArrayAdapter<Project>
 {
-    public ProjectAdapter(Context context, ArrayList<Project> projects) {
+    public ProjectAttrAdapter(Context context, ArrayList<Project> projects) {
         super(context, 0, projects);
     }
 

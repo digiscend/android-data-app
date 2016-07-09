@@ -27,8 +27,14 @@
     <string name="title_browse_country">Browse by Countries</string>
     <string name="title_browse_metal">Browse by Minerals</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_milestones">Milestones</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_properties">Properties</string>
+    <string name="menu_contractors">Contractors</string>
+    <string name="menu_news">News</string>
+    <string name="title_activity_project_view_milestones">ProjectViewMilestonesActivity</string>
 
 </resources>

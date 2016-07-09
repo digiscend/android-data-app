@@ -3,13 +3,14 @@ package com.digiscend.apps.browser.models;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by vikas on 03/07/16.
  */
-public class Company
+public class Company implements Serializable
 {
     public String htmlid;
     public String name;

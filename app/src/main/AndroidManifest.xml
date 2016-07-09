@@ -13,14 +13,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
-        >
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="RestClient.db"/>
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1"/>
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".Activity.HomeActivity"
@@ -29,11 +22,13 @@
         </activity>
         <activity
             android:name=".Activity.MinesActivity"
-            android:label="@string/title_activity_mines">
+            android:label="@string/title_activity_mines"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".Activity.BrowseActivity"
-            android:label="@string/title_activity_mines">
+            android:label="@string/title_activity_mines"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".Activity.AboutActivity"
@@ -41,8 +36,20 @@
         </activity>
         <activity
             android:name=".Activity.ProjectViewActivity"
-            android:label="@string/title_activity_mines">
+            android:label="@string/title_activity_mines"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <activity
+            android:name=".Activity.ProjectAttrsActivity"
+            android:label="@string/title_activity_mines"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.digiscend.apps.browser.Activity.ProjectViewActivity"/>
+        </activity>
+
+
         <activity
             android:name=".Activity.SplashActivity"
             android:label="@string/app_name"
@@ -63,6 +70,16 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Activity.ProjectViewMilestonesActivity"
+            android:label="@string/title_activity_milestones"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Activity.ProjectViewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.digiscend.apps.browser.Activity.ProjectViewActivity"/>
         </activity>
     </application>
 

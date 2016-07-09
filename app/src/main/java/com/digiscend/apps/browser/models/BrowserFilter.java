@@ -5,6 +5,7 @@ import com.digiscend.apps.browser.Activity.BrowseActivity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,6 +13,7 @@ import java.util.HashMap;
  * Created by vikas on 04/07/16.
  */
 public class BrowserFilter
+        implements Serializable
 {
     public String name;
     public String htmlid;
