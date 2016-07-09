@@ -23,6 +23,9 @@ public class Project implements Serializable
     public ArrayList<Project> milestoneProjects =
             new ArrayList<Project>();
 
+    public ArrayList<AttrValue> attrvalues =
+            new ArrayList<AttrValue>();
+
     public Project() {
 
     }
@@ -86,12 +89,16 @@ public class Project implements Serializable
             if(jProject.has("year"))
                 obj.year = jProject.getString ("year");
 
-
-
             if(jProject.has ("selectedCompany"))
             {
                 Company c = null;
                 obj.company = c.parseJsonObject(jProject.getJSONObject ("selectedCompany"));
+            }
+
+            AttrValue av = new AttrValue ();
+            if(jProject.has("attributevalues"))
+            {
+                obj.attrvalues = av.parseJsonObject(jProject.getJSONObject ("attributevalues"));
             }
 
             if(jProject.has ("milestoneProjects"))
@@ -115,4 +122,5 @@ public class Project implements Serializable
         return obj;
 
     }
+
 }

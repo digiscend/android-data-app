@@ -18,30 +18,30 @@ import java.util.ArrayList;
  * Created by vikas on 04/07/16.
  * @see https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
  */
-public class ProjectAttrAdapter extends ArrayAdapter<AttrValue>
+public class ProjectMilestoneAdapter extends ArrayAdapter<Project>
 {
-    public ProjectAttrAdapter(Context context, ArrayList<AttrValue> vals) {
+    public ProjectMilestoneAdapter(Context context, ArrayList<Project> vals) {
         super(context, 0, vals);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        AttrValue av = getItem(position);
+        Project obj = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listitem_milestone_view, parent, false);
         }
 
-        if(av == null)
+        if(obj == null)
             return convertView;
 
         // Lookup view for data population
         TextView tvName = (TextView) convertView.findViewById(R.id.itemName);
         TextView tvYear = (TextView) convertView.findViewById(R.id.textYear);
         // Populate the data into the template view using the data object
-        tvName.setText(av.name);
-        tvYear.setText(av.val);
+        tvName.setText(obj.name);
+        tvYear.setText(obj.year);
         return convertView;
     }
 }

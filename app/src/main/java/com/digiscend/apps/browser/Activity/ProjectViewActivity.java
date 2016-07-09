@@ -29,8 +29,9 @@ import java.util.concurrent.ExecutionException;
 public class ProjectViewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
-
+    int stubLayoutResourceId = 0;
     Project currentProject;
+    boolean stubview = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,13 +39,21 @@ public class ProjectViewActivity extends AppCompatActivity
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_project_view);
 
+        ViewStub stub = (ViewStub) findViewById(R.id.stub);
+
+        if(stubLayoutResourceId==0)
+            stubLayoutResourceId = R.layout.stub_project_properties;
+        stub.setLayoutResource(stubLayoutResourceId);
+        stub.inflate();
+
         Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
         if(toolbar!=null)
             setSupportActionBar (toolbar);
 
-        ViewStub stub = (ViewStub) findViewById(R.id.stub);
-        stub.setLayoutResource(R.layout.stub_project_properties);
-        stub.inflate();
+        if(stubview)
+            return;
+        //common section ends here
+
 
         //ViewGroup.LayoutParams lp2 = getLayoutParams();
         //ViewGroup.LayoutParams lp = stub.getLayoutParams();
@@ -159,7 +168,7 @@ public class ProjectViewActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_properties)
         {
-            Intent intent = new Intent(this, ProjectAttrsActivity.class);
+            Intent intent = new Intent(this, ProjectViewAttrsActivity.class);
             intent.putExtra(Constants.ACTIVE_PROJECT_OBJECT, currentProject);
             startActivity(intent);
         }
@@ -180,6 +189,20 @@ public class ProjectViewActivity extends AppCompatActivity
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.filters, menu);
         return true;
+    }
+
+    public void getProjectFromExtras(Bundle savedInstanceState)
+    {
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                currentProject = null;
+            } else {
+                currentProject = (Project)getIntent().getSerializableExtra(Constants.ACTIVE_PROJECT_OBJECT);
+            }
+        } else {
+            currentProject = (Project)getIntent().getSerializableExtra(Constants.ACTIVE_PROJECT_OBJECT);
+        }
     }
 
 }
