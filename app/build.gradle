@@ -22,8 +22,10 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), "progurard-digiscend.txt"
             signingConfig signingConfigs.config
+            resValue 'string', 'api_server', '"https://digiscend.com"'
         }
         debug {
+            resValue 'string', 'api_server', '"http://10.0.0.11"'
             pseudoLocalesEnabled false
         }
     }

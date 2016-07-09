@@ -42,7 +42,7 @@ public class ProjectViewActivity extends AppCompatActivity
         ViewStub stub = (ViewStub) findViewById(R.id.stub);
 
         if(stubLayoutResourceId==0)
-            stubLayoutResourceId = R.layout.stub_project_properties;
+            stubLayoutResourceId = R.layout.stub_project_description;
         stub.setLayoutResource(stubLayoutResourceId);
         stub.inflate();
 
@@ -97,20 +97,8 @@ public class ProjectViewActivity extends AppCompatActivity
             e.printStackTrace ();
         }
 
-
-        TextView tvName = (TextView)findViewById (R.id.textYear);
-        TextView tvCountry = (TextView)findViewById (R.id.countryName);
-        TextView tvCompany = (TextView)findViewById (R.id.companyName);
-        TextView tvIntro = (TextView)findViewById (R.id.projectIntro);
-
         currentProject = projects.get (0);
-
-        setTitle(currentProject.name);
-        tvCountry.setText (currentProject.country);
-        if(tvIntro != null)
-            tvIntro.setText (Html.fromHtml (currentProject.intro));
-        if(currentProject.company != null)
-            tvCompany.setText (projects.get (0).company.name);
+        setProjectHeaders(currentProject);
 
         String url = null;
 
@@ -138,6 +126,22 @@ public class ProjectViewActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById (R.id.nav_view);
         navigationView.setNavigationItemSelectedListener (this);
+    }
+
+    public void setProjectHeaders(Project p)
+    {
+        TextView tvCountry = (TextView)findViewById (R.id.countryName);
+        TextView tvCompany = (TextView)findViewById (R.id.companyName);
+        TextView tvIntro = (TextView)findViewById (R.id.projectIntro);
+
+
+        setTitle(p.name);
+        tvCountry.setText (p.country);
+        if(tvIntro != null)
+            tvIntro.setText (Html.fromHtml (p.intro));
+        if(currentProject.company != null)
+            tvCompany.setText (p.company.name);
+
     }
 
     @Override

@@ -19,6 +19,7 @@ public class ProjectViewMilestonesActivity extends ProjectViewActivity
         super.onCreate (savedInstanceState);
         //common work done by the parent
         super.getProjectFromExtras(savedInstanceState);
+        setProjectHeaders(currentProject);
         setProjects (currentProject.milestoneProjects);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
