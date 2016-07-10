@@ -1,5 +1,9 @@
 package com.digiscend.apps.browser.models;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,6 +19,7 @@ public class Company implements Serializable
     public String htmlid;
     public String name;
     public String logosrc;
+    public Bitmap logobitmap = null;
     //public int company_id;
     //public String country;
 
@@ -75,7 +80,13 @@ public class Company implements Serializable
             obj.name = jCompany.getString ("name");
             obj.htmlid = jCompany.getString ("htmlid");
             obj.logosrc = jCompany.getString ("logosrc");
-                //p.country = jsonProject.getString ("countryName");
+
+            if(jCompany.has ("logo_base64"))
+            {
+                byte[] decodedString = Base64.decode (jCompany.getString ("logo_base64"), Base64.DEFAULT);
+                obj.logobitmap = BitmapFactory.decodeByteArray (decodedString, 0, decodedString.length);
+            }
+            //p.country = jsonProject.getString ("countryName");
 
         }
         catch(Exception e)

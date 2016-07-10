@@ -102,20 +102,29 @@ public class ProjectViewActivity extends AppCompatActivity
 
         String url = null;
 
-        try
+        if(currentProject.company.logobitmap != null)
         {
-            url = getResources().getString(R.string.api_server) + currentProject.company.logosrc;
-            Bitmap bitmap = new ImageTask ().execute (url).get ();
-            ImageView iview = (ImageView)findViewById (R.id.companyLogo);
-            iview.setImageBitmap (bitmap);
+            ImageView iview = (ImageView) findViewById (R.id.companyLogo);
+            iview.setImageBitmap (currentProject.company.logobitmap);
         }
-        catch (InterruptedException e)
+        else
         {
-            e.printStackTrace ();
-        }
-        catch (ExecutionException e)
-        {
-            e.printStackTrace ();
+            try
+            {
+                url = getResources().getString(R.string.api_server) + currentProject.company.logosrc;
+                Bitmap bitmap = new ImageTask ().execute (url).get ();
+                ImageView iview = (ImageView)findViewById (R.id.companyLogo);
+                iview.setImageBitmap (bitmap);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace ();
+            }
+            catch (ExecutionException e)
+            {
+                e.printStackTrace ();
+            }
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById (R.id.project_view_layout);
@@ -173,6 +182,12 @@ public class ProjectViewActivity extends AppCompatActivity
         else if (id == R.id.nav_properties)
         {
             Intent intent = new Intent(this, ProjectViewAttrsActivity.class);
+            intent.putExtra(Constants.ACTIVE_PROJECT_OBJECT, currentProject);
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_contractors)
+        {
+            Intent intent = new Intent(this, ProjectViewContractorsActivity.class);
             intent.putExtra(Constants.ACTIVE_PROJECT_OBJECT, currentProject);
             startActivity(intent);
         }

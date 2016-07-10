@@ -10,9 +10,11 @@ import com.digiscend.apps.browser.Activity.SplashActivity;
 import com.digiscend.apps.browser.models.Constants;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -34,7 +36,7 @@ public class ReaderTask extends AsyncTask<String, Void, String>
     {
     }
 
-    private String readStream(InputStream is) {
+    private String readStream(InputStream is,int cl) {
         try {
             ByteArrayOutputStream bo = new ByteArrayOutputStream();
             int i = is.read();
@@ -58,11 +60,23 @@ public class ReaderTask extends AsyncTask<String, Void, String>
 
                 int maxStale = 60 * 60 * 24 * 1; // tolerate 4-weeks stale
                 urlConnection.addRequestProperty ("Cache-Control", "max-stale=" + maxStale);
-
                 urlConnection.setUseCaches (true);
-                InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
 
-                rt = readStream (in);
+                //
+                InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
+                rt = readStream (in,urlConnection.getContentLength ());
+                //
+                /*BufferedReader in = new BufferedReader (new InputStreamReader (
+                        urlConnection.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                //
+                rt = response.toString ();*/
                 urlConnection.disconnect();
             }
 

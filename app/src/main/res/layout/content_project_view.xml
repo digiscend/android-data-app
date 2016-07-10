@@ -43,12 +43,7 @@
         android:id="@+id/countryName"
         android:layout_below="@+id/companyName"/>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true"
-                android:id="@+id/scrollView"
-                android:layout_below="@+id/companyLogo">
+
 
         <ViewStub android:id="@+id/stub"
                   android:layout="@layout/stub_project_description"
@@ -58,7 +53,6 @@
             android:text="intro text"
             android:scrollbars = "vertical"/>
 
-    </ScrollView>
 
 
 

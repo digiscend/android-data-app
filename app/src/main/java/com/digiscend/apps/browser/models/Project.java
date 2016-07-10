@@ -23,6 +23,9 @@ public class Project implements Serializable
     public ArrayList<Project> milestoneProjects =
             new ArrayList<Project>();
 
+    public ArrayList<Project> majorProjects =
+            new ArrayList<Project>();
+
     public ArrayList<AttrValue> attrvalues =
             new ArrayList<AttrValue>();
 
@@ -101,19 +104,9 @@ public class Project implements Serializable
                 obj.attrvalues = av.parseJsonObject(jProject.getJSONObject ("attributevalues"));
             }
 
-            if(jProject.has ("milestoneProjects"))
-            {
-                JSONArray jProjects2 = jProject.getJSONArray ("milestoneProjects");
+            processProjects("milestoneProjects",obj.milestoneProjects,jProject);
+            processProjects("majorProjects", obj.majorProjects,jProject);
 
-                for (int i = 0; i < jProjects2.length (); i++)
-                {
-                    HashMap<String, String> map = new HashMap<String, String> ();
-                    JSONObject jsonProject = jProjects2.getJSONObject (i);
-
-                    Project p = parseJsonObject (jsonProject);
-                    obj.milestoneProjects.add (p);
-                }
-            }
         }
         catch(Exception e)
         {
@@ -122,5 +115,32 @@ public class Project implements Serializable
         return obj;
 
     }
+
+    public static void processProjects(String key,ArrayList arrayList,JSONObject jProject)
+    {
+        if(jProject.has (key))
+        {
+            try
+            {
+
+                JSONArray jProjects2 = jProject.getJSONArray (key);
+
+                for (int i = 0; i < jProjects2.length (); i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String> ();
+                    JSONObject jsonProject = jProjects2.getJSONObject (i);
+
+                    Project p = parseJsonObject (jsonProject);
+                    arrayList.add (p);
+                }
+
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+    }
+
 
 }
