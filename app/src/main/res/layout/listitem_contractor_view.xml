@@ -8,6 +8,17 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/contractorLogo"/>
+        android:id="@+id/contractorLogo"
+        android:layout_alignBottom="@+id/itemName"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+        android:text="Name"
+        android:id="@+id/itemName"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/contractorLogo"/>
+
 
 </RelativeLayout>

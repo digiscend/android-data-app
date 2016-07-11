@@ -41,11 +41,26 @@ public class ProjectContractorsAdapter extends ArrayAdapter<Project>
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listitem_contractor_view, parent, false);
         }
-        // Lookup view for data population
-        ImageView iview = (ImageView) convertView.findViewById(R.id.contractorLogo);
-        Bitmap bitmap = BitmapFactory.decodeByteArray (currentProject.company.logobitmap, 0, currentProject.company.logobitmap.length);
-        if(bitmap != null)
-            iview.setImageBitmap (bitmap);
+        TextView tvItemName = (TextView)convertView.findViewById (R.id.itemName);
+        if(tvItemName != null)
+        {
+            if(currentProject == null)
+            {
+                tvItemName.setText ("currentProject NULL");
+                return convertView;
+            }
+            else
+                tvItemName.setText (currentProject.company.name);
+        }
+
+        if(currentProject.company.logobitmap != null)
+        {
+            // Lookup view for data population
+            ImageView iview = (ImageView) convertView.findViewById (R.id.contractorLogo);
+            Bitmap bitmap = BitmapFactory.decodeByteArray (currentProject.company.logobitmap, 0, currentProject.company.logobitmap.length);
+            if (bitmap != null)
+                iview.setImageBitmap (bitmap);
+        }
         return convertView;
     }
 }

@@ -91,6 +91,7 @@ public class ProjectViewActivity extends AppCompatActivity
         try
         {
             String url=getResources().getString(R.string.api_server) + getResources().getString(R.string.api_project) + "/" + projectid + "?lang=" + getResources().getString(R.string.api_q_lang);
+            Log.v(Constants.LOG_PLURL,url);
             str_result = new ReaderTask ().execute (url).get ();
             Project p = null;
             projects = p.parseJson(str_result);
@@ -105,33 +106,7 @@ public class ProjectViewActivity extends AppCompatActivity
         currentProject = projects.get (0);
         setProjectHeaders(currentProject);
 
-        String url = null;
 
-        if(currentProject.company.logobitmap != null)
-        {
-            ImageView iview = (ImageView) findViewById (R.id.companyLogo);
-            Bitmap bitmap = BitmapFactory.decodeByteArray (currentProject.company.logobitmap, 0, currentProject.company.logobitmap.length);
-            iview.setImageBitmap (bitmap);
-        }
-        else
-        {
-            try
-            {
-                url = getResources().getString(R.string.api_server) + currentProject.company.logosrc;
-                Bitmap bitmap = new ImageTask ().execute (url).get ();
-                ImageView iview = (ImageView)findViewById (R.id.companyLogo);
-                iview.setImageBitmap (bitmap);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace ();
-            }
-            catch (ExecutionException e)
-            {
-                e.printStackTrace ();
-            }
-
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById (R.id.project_view_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle (
@@ -156,6 +131,34 @@ public class ProjectViewActivity extends AppCompatActivity
             tvIntro.setText (Html.fromHtml (p.intro));
         if(currentProject.company != null)
             tvCompany.setText (p.company.name);
+
+        String url = null;
+
+        if(p.company.logobitmap != null)
+        {
+            ImageView iview = (ImageView) findViewById (R.id.companyLogo);
+            Bitmap bitmap = BitmapFactory.decodeByteArray (p.company.logobitmap, 0, p.company.logobitmap.length);
+            iview.setImageBitmap (bitmap);
+        }
+        else
+        {
+            try
+            {
+                url = getResources().getString(R.string.api_server) + p.company.logosrc;
+                Bitmap bitmap = new ImageTask ().execute (url).get ();
+                ImageView iview = (ImageView)findViewById (R.id.companyLogo);
+                iview.setImageBitmap (bitmap);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace ();
+            }
+            catch (ExecutionException e)
+            {
+                e.printStackTrace ();
+            }
+
+        }
 
     }
 

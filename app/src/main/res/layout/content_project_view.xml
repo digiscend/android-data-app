@@ -51,7 +51,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="intro text"
-            android:scrollbars = "vertical"/>
+              android:layout_below="@+id/companyLogo"
+              android:scrollbars = "vertical"/>
 
 
 
