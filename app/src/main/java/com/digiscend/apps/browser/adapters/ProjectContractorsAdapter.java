@@ -2,6 +2,8 @@ package com.digiscend.apps.browser.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ImageTask;
+import com.digiscend.apps.browser.models.Constants;
 import com.digiscend.apps.browser.models.Project;
 
 import java.util.ArrayList;
@@ -29,6 +32,9 @@ public class ProjectContractorsAdapter extends ArrayAdapter<Project>
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        Log.i (Constants.LOG,"Starting ProjectContractorsAdapter");
+
         // Get the data item for this position
         Project currentProject = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -37,7 +43,9 @@ public class ProjectContractorsAdapter extends ArrayAdapter<Project>
         }
         // Lookup view for data population
         ImageView iview = (ImageView) convertView.findViewById(R.id.contractorLogo);
-        iview.setImageBitmap (currentProject.company.logobitmap);
+        Bitmap bitmap = BitmapFactory.decodeByteArray (currentProject.company.logobitmap, 0, currentProject.company.logobitmap.length);
+        if(bitmap != null)
+            iview.setImageBitmap (bitmap);
         return convertView;
     }
 }

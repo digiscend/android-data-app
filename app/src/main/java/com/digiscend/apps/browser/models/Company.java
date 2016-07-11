@@ -19,7 +19,7 @@ public class Company implements Serializable
     public String htmlid;
     public String name;
     public String logosrc;
-    public Bitmap logobitmap = null;
+    public byte[] logobitmap;
     //public int company_id;
     //public String country;
 
@@ -83,8 +83,7 @@ public class Company implements Serializable
 
             if(jCompany.has ("logo_base64"))
             {
-                byte[] decodedString = Base64.decode (jCompany.getString ("logo_base64"), Base64.DEFAULT);
-                obj.logobitmap = BitmapFactory.decodeByteArray (decodedString, 0, decodedString.length);
+                obj.logobitmap = Base64.decode (jCompany.getString ("logo_base64"), Base64.DEFAULT);
             }
             //p.country = jsonProject.getString ("countryName");
 

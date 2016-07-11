@@ -2,6 +2,7 @@ package com.digiscend.apps.browser.Activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,7 +53,10 @@ public class ProjectViewActivity extends AppCompatActivity
             setSupportActionBar (toolbar);
 
         if(stubview)
+        {
+            Log.i (Constants.LOG,"Returning to caller activity from ProjectViewActivity");
             return;
+        }
         //common section ends here
 
 
@@ -105,7 +110,8 @@ public class ProjectViewActivity extends AppCompatActivity
         if(currentProject.company.logobitmap != null)
         {
             ImageView iview = (ImageView) findViewById (R.id.companyLogo);
-            iview.setImageBitmap (currentProject.company.logobitmap);
+            Bitmap bitmap = BitmapFactory.decodeByteArray (currentProject.company.logobitmap, 0, currentProject.company.logobitmap.length);
+            iview.setImageBitmap (bitmap);
         }
         else
         {
@@ -189,6 +195,7 @@ public class ProjectViewActivity extends AppCompatActivity
         {
             Intent intent = new Intent(this, ProjectViewContractorsActivity.class);
             intent.putExtra(Constants.ACTIVE_PROJECT_OBJECT, currentProject);
+            Log.i (Constants.LOG,"Going to starting contractor activity");
             startActivity(intent);
         }
         /*if (id == R.id.nav_share)
