@@ -1,11 +1,24 @@
 package com.digiscend.apps.browser.models;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.digiscend.apps.browser.R;
+import com.digiscend.apps.browser.Task.ReaderTask;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by vikas on 03/07/16.
@@ -142,5 +155,72 @@ public class Project implements Serializable
         }
     }
 
+    public static Project loadById(String htmlid,Context context)
+    {
+        Project currentProject;
+        String CACHEFILENAME = "project." + htmlid;
 
+        File file = new File(CACHEFILENAME);
+
+        //check if serialized copy of project in local cache
+        if(file.exists())//found in local cache)
+        {
+            ObjectInputStream ois = null;
+            FileInputStream fis = null;
+            //load from local cache
+            try
+            {
+                fis = context.openFileInput (CACHEFILENAME);
+                ois = new ObjectInputStream (fis);
+                currentProject = (Project) ois.readObject();
+                ois.close();
+                fis.close ();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace ();
+            }
+
+        }
+        //else
+        {
+            ArrayList<Project> projects = null;
+            String str_result = null;
+            try
+            {
+                String url = context.getResources ().getString (R.string.api_server)
+                            + context.getResources ().getString (R.string.api_project)
+                            + "/" + htmlid
+                            + "?lang=" + context.getResources ().getString (R.string.api_q_lang);
+                Log.v (Constants.LOG_PLURL, url);
+                str_result = new ReaderTask ().execute (url).get ();
+                Project p = null;
+                projects = p.parseJson (str_result);
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace ();
+            } catch (ExecutionException e)
+            {
+                e.printStackTrace ();
+            }
+
+            currentProject = projects.get (0);
+            //save in local cache
+
+            ObjectOutputStream out = null;
+            FileOutputStream fos = null;
+            try
+            {
+                fos = context.openFileOutput(CACHEFILENAME, Context.MODE_PRIVATE);
+                out = new ObjectOutputStream(fos);
+                out.writeObject (currentProject);
+                out.close ();
+                fos.close();
+            } catch (Exception e)
+            {
+                e.printStackTrace ();
+            }
+        }
+        return currentProject;
+    }
 }

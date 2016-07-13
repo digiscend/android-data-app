@@ -60,18 +60,6 @@ public class ProjectViewActivity extends AppCompatActivity
         //common section ends here
 
 
-        //ViewGroup.LayoutParams lp2 = getLayoutParams();
-        //ViewGroup.LayoutParams lp = stub.getLayoutParams();
-        //lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-        //int h = lp.height;
-        //int h2= lp2.height;
-
-        //stub.setLayoutParams(lp);
-
-        //stub.setMinimumHeight (h - h2);
-
-
         String newString;
         String projectid = "";
 
@@ -86,27 +74,10 @@ public class ProjectViewActivity extends AppCompatActivity
             projectid= (String) savedInstanceState.getSerializable(MinesActivity.EXTRA_MESSAGE);
         }
 
-        ArrayList<Project> projects = null;
-        String str_result = null;
-        try
-        {
-            String url=getResources().getString(R.string.api_server) + getResources().getString(R.string.api_project) + "/" + projectid + "?lang=" + getResources().getString(R.string.api_q_lang);
-            Log.v(Constants.LOG_PLURL,url);
-            str_result = new ReaderTask ().execute (url).get ();
-            Project p = null;
-            projects = p.parseJson(str_result);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace ();
-        } catch (ExecutionException e)
-        {
-            e.printStackTrace ();
-        }
+        Project p = null;
+        currentProject = p.loadById (projectid,getBaseContext ());
 
-        currentProject = projects.get (0);
         setProjectHeaders(currentProject);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById (R.id.project_view_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle (
