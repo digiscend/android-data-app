@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.digiscend.apps.browser.BuildConfig;
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ImageTask;
 import com.digiscend.apps.browser.Task.PreloadingTask;
@@ -37,19 +38,23 @@ public class SplashActivity extends AppCompatActivity
         {
             String[] url = {getResources ().getString (R.string.api_server)
                         + getResources ().getString (R.string.api_projectlist)
-                        + "?lang=" + getResources ().getString (R.string.api_q_lang),
+                        + "?lang=" + getResources ().getString (R.string.api_q_lang)
+                        + "&v=" + BuildConfig.VERSION_CODE,
 
             getResources().getString(R.string.api_server)
                     + getResources().getString(R.string.api_metallist)
-                    + "?lang=" + getResources().getString(R.string.api_q_lang),
+                    + "?lang=" + getResources().getString(R.string.api_q_lang)
+                    + "&v=" + BuildConfig.VERSION_CODE,
 
             getResources().getString(R.string.api_server)
                     + getResources().getString(R.string.api_countrylist)
-            + "?lang=" + getResources().getString(R.string.api_q_lang),
+            + "?lang=" + getResources().getString(R.string.api_q_lang)
+                    + "&v=" + BuildConfig.VERSION_CODE,
 
             getResources().getString(R.string.api_server)
                     + getResources().getString(R.string.api_stagelist)
-                    + "?lang=" + getResources().getString(R.string.api_q_lang)};
+                    + "?lang=" + getResources().getString(R.string.api_q_lang)
+                    + "&v=" + BuildConfig.VERSION_CODE};
             task1 = new ReaderTask (this);
             task1.execute (url);
 

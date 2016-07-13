@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.digiscend.apps.browser.BuildConfig;
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.Constants;
@@ -52,6 +53,7 @@ public class MinesActivity extends AppCompatActivity
 
         ArrayList<String> filterInfoStrings = new ArrayList<String>();
         String filters = "";
+        String filters2 = "";
         if(browsetype != null)
         {
 
@@ -67,6 +69,7 @@ public class MinesActivity extends AppCompatActivity
                     break;
 
                 filters += "/" + ss[0] + "/" + ss[1];
+                filters2 += "-" + ss[0] + "-" + ss[1];
 
                 String  title = toSentenceCase(ss[0]);
 
@@ -90,21 +93,9 @@ public class MinesActivity extends AppCompatActivity
         // Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
 
         //setSupportActionBar (toolbar);
-
-        try
-        {
-            //new ReaderTask().execute("http://gateway.local/site/helloservice");
-            //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
-            String url = getResources ().getString (R.string.api_server) + getResources ().getString (R.string.api_projectlist) + filters + "?lang=" + getResources ().getString (R.string.api_q_lang);
-            Log.v(Constants.LOG_PLURL,url);
-            String str_result = new ReaderTask ().execute (url).get ();
-            Project p = null;
-            ArrayList<Project> projects = p.parseJson (str_result);
-            setProjects (projects);
-        } catch (Exception e)
-        {
-
-        }
+        Project p = null;
+        ArrayList<Project> projects = p.loadlistByFilters(filters,filters2,getBaseContext (), BuildConfig.VERSION_CODE);
+        setProjects (projects);
     }
 
     protected void setProjects(ArrayList<Project> projects)

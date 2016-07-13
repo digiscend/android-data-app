@@ -155,10 +155,10 @@ public class Project implements Serializable
         }
     }
 
-    public static Project loadById(String htmlid,Context context)
+    public static Project loadById(String htmlid,Context context,int versioncode)
     {
         Project currentProject = null;
-        String CACHEFILENAME = "project." + htmlid;
+        String CACHEFILENAME = "project." + versioncode + "." + htmlid;
         boolean filefound=true;
         File file = new File(CACHEFILENAME);
 
@@ -173,6 +173,11 @@ public class Project implements Serializable
                 fis = context.openFileInput (CACHEFILENAME);
                 ois = new ObjectInputStream (fis);
                 currentProject = (Project) ois.readObject();
+                if(currentProject == null)
+                {
+                    filefound = false;
+                    context.openFileInput (CACHEFILENAME);
+                }
                 ois.close();
                 fis.close ();
             }
@@ -183,6 +188,7 @@ public class Project implements Serializable
             catch(Exception e)
             {
                 e.printStackTrace ();
+                filefound=false;
             }
 
         }
@@ -195,7 +201,8 @@ public class Project implements Serializable
                 String url = context.getResources ().getString (R.string.api_server)
                             + context.getResources ().getString (R.string.api_project)
                             + "/" + htmlid
-                            + "?lang=" + context.getResources ().getString (R.string.api_q_lang);
+                            + "?lang=" + context.getResources ().getString (R.string.api_q_lang)
+                            + "&v=" + versioncode;
                 Log.v (Constants.LOG_PLURL, url);
                 str_result = new ReaderTask ().execute (url).get ();
                 projects = parseJson (str_result);
@@ -225,5 +232,72 @@ public class Project implements Serializable
             }
         }
         return currentProject;
+    }
+
+    public static ArrayList<Project> loadlistByFilters(String filters,String filters2,Context context,int versioncode)
+    {
+        ArrayList<Project> projects = null;
+        boolean filefound = true;
+        String CACHEFILENAME = "projects." + versioncode + "." + filters2;
+
+        //check if serialized copy of project in local cache
+        if (filefound)//found in local cache)
+        {
+            ObjectInputStream ois = null;
+            FileInputStream fis = null;
+            //load from local cache
+            try
+            {
+                fis = context.openFileInput (CACHEFILENAME);
+                ois = new ObjectInputStream (fis);
+                projects = (ArrayList<Project>) ois.readObject ();
+                if(projects == null)
+                {
+                    filefound = false;
+                    context.openFileInput (CACHEFILENAME);
+                }
+                ois.close ();
+                fis.close ();
+            } catch (FileNotFoundException e)
+            {
+                filefound = false;
+            } catch (Exception e)
+            {
+                e.printStackTrace ();
+                filefound=false;
+            }
+
+        }
+        if (!filefound)
+        {
+
+            try
+            {
+                //new ReaderTask().execute("http://gateway.local/site/helloservice");
+                //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
+                String url = context.getResources ().getString (R.string.api_server)
+                        + context.getResources ().getString (R.string.api_projectlist)
+                        + filters + "?lang="
+                        + context.getResources ().getString (R.string.api_q_lang)
+                        + "&v=" + versioncode;;
+                Log.v (Constants.LOG_PLURL, url);
+                String str_result = new ReaderTask ().execute (url).get ();
+                projects = parseJson (str_result);
+
+                ObjectOutputStream out = null;
+                FileOutputStream fos = null;
+
+                fos = context.openFileOutput (CACHEFILENAME, Context.MODE_PRIVATE);
+                out = new ObjectOutputStream (fos);
+                out.writeObject (projects);
+                out.close ();
+                fos.close ();
+            } catch (Exception e)
+            {
+                e.printStackTrace ();
+            }
+
+        }
+        return projects;
     }
 }

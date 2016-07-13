@@ -19,6 +19,7 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.digiscend.apps.browser.BuildConfig;
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ImageTask;
 import com.digiscend.apps.browser.Task.ReaderTask;
@@ -75,7 +76,7 @@ public class ProjectViewActivity extends AppCompatActivity
         }
 
         Project p = null;
-        currentProject = p.loadById (projectid,getBaseContext ());
+        currentProject = p.loadById (projectid,getBaseContext (), BuildConfig.VERSION_CODE);
 
         setProjectHeaders(currentProject);
 

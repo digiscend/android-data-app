@@ -14,6 +14,7 @@ import android.content.Context;
  */
 public class BrowserApplication extends Application
 {
+	public static int appVersion = BuildConfig.VERSION_CODE;
 	private static Context context;
 
 	@Override
