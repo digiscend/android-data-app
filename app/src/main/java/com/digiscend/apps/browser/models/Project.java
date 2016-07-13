@@ -157,13 +157,13 @@ public class Project implements Serializable
 
     public static Project loadById(String htmlid,Context context)
     {
-        Project currentProject;
+        Project currentProject = null;
         String CACHEFILENAME = "project." + htmlid;
-
+        boolean filefound=true;
         File file = new File(CACHEFILENAME);
 
         //check if serialized copy of project in local cache
-        if(file.exists())//found in local cache)
+        if(filefound)//found in local cache)
         {
             ObjectInputStream ois = null;
             FileInputStream fis = null;
@@ -176,13 +176,17 @@ public class Project implements Serializable
                 ois.close();
                 fis.close ();
             }
+            catch(FileNotFoundException e)
+            {
+                filefound=false;
+            }
             catch(Exception e)
             {
                 e.printStackTrace ();
             }
 
         }
-        //else
+        if(!filefound)
         {
             ArrayList<Project> projects = null;
             String str_result = null;
@@ -194,8 +198,7 @@ public class Project implements Serializable
                             + "?lang=" + context.getResources ().getString (R.string.api_q_lang);
                 Log.v (Constants.LOG_PLURL, url);
                 str_result = new ReaderTask ().execute (url).get ();
-                Project p = null;
-                projects = p.parseJson (str_result);
+                projects = parseJson (str_result);
             } catch (InterruptedException e)
             {
                 e.printStackTrace ();

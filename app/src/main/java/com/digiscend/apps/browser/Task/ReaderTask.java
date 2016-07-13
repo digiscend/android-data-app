@@ -63,10 +63,10 @@ public class ReaderTask extends AsyncTask<String, Void, String>
                 urlConnection.setUseCaches (true);
 
                 //
-                InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
-                rt = readStream (in,urlConnection.getContentLength ());
+                //InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
+                //rt = readStream (in,urlConnection.getContentLength ());
                 //
-                /*BufferedReader in = new BufferedReader (new InputStreamReader (
+                BufferedReader in = new BufferedReader (new InputStreamReader (
                         urlConnection.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
@@ -76,7 +76,7 @@ public class ReaderTask extends AsyncTask<String, Void, String>
                 }
                 in.close();
                 //
-                rt = response.toString ();*/
+                rt = response.toString ();
                 urlConnection.disconnect();
             }
 
