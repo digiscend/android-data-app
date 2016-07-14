@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity
+		implements SearchView.OnQueryTextListener
 {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,10 @@ public class HomeActivity extends AppCompatActivity
 
         //PreloadingTask pre =new PreloadingTask (this);
         //pre.execute ();
+
+		SearchView search=(SearchView) findViewById (R.id.searchView1);
+		search.setQueryHint("SearchView");
+		search.setOnQueryTextListener(this);
 
         File httpCacheDir = new File (getApplicationContext().getCacheDir()
 				, "http");
@@ -100,5 +106,20 @@ public class HomeActivity extends AppCompatActivity
 				break;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		// User pressed the search button
+		Intent intent = new Intent(getBaseContext (), MinesActivity.class);
+		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_SEARCH + "=" + query);
+		startActivity(intent);
+		return true;
+	}
+
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		// User changed the text
+		return false;
 	}
 }

@@ -25,7 +25,7 @@ android {
             resValue 'string', 'api_server', '"https://digiscend.com"'
         }
         debug {
-            resValue 'string', 'api_server', '"http://10.0.0.7"'
+            resValue 'string', 'api_server', '"http://192.168.0.100"'
             pseudoLocalesEnabled false
         }
     }

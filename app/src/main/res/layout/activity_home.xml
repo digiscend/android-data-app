@@ -8,16 +8,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Activity.HomeActivity" >
 
+    <SearchView
+        android:id="@+id/searchView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+    </SearchView>
+
     <Button
         android:id="@+id/topprojects"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
         android:onClick="showTopProjects"
         android:text="@string/top_projects_label"
         android:background="@android:color/holo_orange_dark"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        android:layout_below="@+id/searchView1"
+        android:layout_alignLeft="@+id/browseCountry"
+        android:layout_alignRight="@+id/browseCountry"/>
 
     <Button
         android:id="@+id/browseCountry"
@@ -54,5 +63,6 @@
         android:layout_margin="10dp"
         android:background="@android:color/holo_orange_dark"
         android:textColor="#ffffff"/>
+
 
 </RelativeLayout>

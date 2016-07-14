@@ -31,6 +31,8 @@ public class BrowseActivity extends AppCompatActivity
 
     public final static String BROWSE_METAL = "metal";
 
+    public final static String BROWSE_SEARCH = "q";
+
     public String browsetype = "";
     public String filters = "";
 
