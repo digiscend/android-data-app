@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class BrowseActivity extends AppCompatActivity
 {
     public final static String EXTRA_BROWSETYPE = "browsetype";
+    public static final String EXTRA_BROWSETYPENAME = "typename";
 
     public final static String BROWSE_COUNTRY = "country";
 
@@ -34,6 +35,7 @@ public class BrowseActivity extends AppCompatActivity
     public final static String BROWSE_SEARCH = "q";
 
     public String browsetype = "";
+    public String typename = "";
     public String filters = "";
 
     @Override
@@ -42,17 +44,17 @@ public class BrowseActivity extends AppCompatActivity
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_mines);
 
-
-
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 browsetype = BROWSE_COUNTRY;
             } else {
                 browsetype = extras.getString(EXTRA_BROWSETYPE);
+                typename = extras.getString(EXTRA_BROWSETYPENAME);
             }
         } else {
             browsetype = (String) savedInstanceState.getSerializable(EXTRA_BROWSETYPE);
+            typename = (String) savedInstanceState.getSerializable(EXTRA_BROWSETYPENAME);
         }
 
         TextView txtfilterInfo = (TextView) findViewById(R.id.filterInfo);
@@ -65,15 +67,15 @@ public class BrowseActivity extends AppCompatActivity
         switch(browsetypelist[0])
         {
             case BROWSE_STAGE:
-                api_browselisttype = getResources().getString(R.string.api_stagelist);
+                api_browselisttype = Constants.API_STAGELIST;
                 setTitle (getResources().getString(R.string.title_browse_stage));
                 break;
             case BROWSE_COUNTRY:
-                api_browselisttype = getResources().getString(R.string.api_countrylist);
+                api_browselisttype = Constants.API_COUNTRYLIST;
                 setTitle (getResources().getString(R.string.title_browse_country));
                 break;
             case BROWSE_METAL:
-                api_browselisttype = getResources().getString(R.string.api_metallist);
+                api_browselisttype = Constants.API_METALLIST;
                 setTitle (getResources().getString(R.string.title_browse_metal));
                 break;
         }
@@ -97,8 +99,6 @@ public class BrowseActivity extends AppCompatActivity
         Log.v(Constants.LOG_BWFILTER,filters);
         try
         {
-            //new ReaderTask().execute("http://gateway.local/site/helloservice");
-            //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
             String url = getResources().getString(R.string.api_server)
                     + api_browselisttype
                     + filters
@@ -140,10 +140,13 @@ public class BrowseActivity extends AppCompatActivity
                 if(lastbrowsetypelist.length>1)
                 {
                     for (int i = 1; i < lastbrowsetypelist.length; i++)
+                    {
                         val.lastbrowsetype = lastbrowsetypelist[i] + "," + val.lastbrowsetype;
+                    }
                 }
                 Intent intent = new Intent(getBaseContext (), MinesActivity.class);
                 intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, val.withLastBrowseType());
+                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPENAME, val.withLastName ());
                 startActivity(intent);
             }
         });

@@ -15,6 +15,7 @@ import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ImageTask;
 import com.digiscend.apps.browser.Task.PreloadingTask;
 import com.digiscend.apps.browser.Task.ReaderTask;
+import com.digiscend.apps.browser.models.Constants;
 
 import java.util.concurrent.ExecutionException;
 
@@ -37,22 +38,22 @@ public class SplashActivity extends AppCompatActivity
         try
         {
             String[] url = {getResources ().getString (R.string.api_server)
-                        + getResources ().getString (R.string.api_projectlist)
+                        + Constants.API_PROJECTLIST
                         + "?lang=" + getResources ().getString (R.string.api_q_lang)
                         + "&v=" + BuildConfig.VERSION_CODE,
 
             getResources().getString(R.string.api_server)
-                    + getResources().getString(R.string.api_metallist)
+                    + Constants.API_METALLIST
                     + "?lang=" + getResources().getString(R.string.api_q_lang)
                     + "&v=" + BuildConfig.VERSION_CODE,
 
             getResources().getString(R.string.api_server)
-                    + getResources().getString(R.string.api_countrylist)
+                    + Constants.API_COUNTRYLIST
             + "?lang=" + getResources().getString(R.string.api_q_lang)
                     + "&v=" + BuildConfig.VERSION_CODE,
 
             getResources().getString(R.string.api_server)
-                    + getResources().getString(R.string.api_stagelist)
+                    + Constants.API_STAGELIST
                     + "?lang=" + getResources().getString(R.string.api_q_lang)
                     + "&v=" + BuildConfig.VERSION_CODE};
             task1 = new ReaderTask (this);

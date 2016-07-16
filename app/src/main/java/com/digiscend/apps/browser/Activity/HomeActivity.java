@@ -27,17 +27,8 @@ public class HomeActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 
-		/*ProgressDialog dialog=new ProgressDialog(getBaseContext ());
-		dialog.setMessage("message");
-		dialog.setCancelable(false);
-		dialog.setInverseBackgroundForced(false);
-		dialog.show();*/
-
-        //PreloadingTask pre =new PreloadingTask (this);
-        //pre.execute ();
-
 		SearchView search=(SearchView) findViewById (R.id.searchView1);
-		search.setQueryHint("SearchView");
+		search.setQueryHint(getResources ().getString (R.string.search));
 		search.setOnQueryTextListener(this);
 
         File httpCacheDir = new File (getApplicationContext().getCacheDir()
@@ -97,8 +88,6 @@ public class HomeActivity extends AppCompatActivity
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Toast.makeText(getApplicationContext(),	item.getTitle() + " selected", Toast.LENGTH_SHORT).show();
-
 		switch (item.getItemId()) {
 			case R.id.aboutmenuitem:
 				Intent intent = new Intent (HomeActivity.this, AboutActivity.class);

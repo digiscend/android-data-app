@@ -85,8 +85,6 @@ public class Company implements Serializable
             {
                 obj.logobitmap = Base64.decode (jCompany.getString ("logo_base64"), Base64.DEFAULT);
             }
-            //p.country = jsonProject.getString ("countryName");
-
         }
         catch(Exception e)
         {

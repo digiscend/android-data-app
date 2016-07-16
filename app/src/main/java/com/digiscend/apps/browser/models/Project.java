@@ -199,7 +199,7 @@ public class Project implements Serializable
             try
             {
                 String url = context.getResources ().getString (R.string.api_server)
-                            + context.getResources ().getString (R.string.api_project)
+                            + Constants.API_PROJECT
                             + "/" + htmlid
                             + "?lang=" + context.getResources ().getString (R.string.api_q_lang)
                             + "&v=" + versioncode;
@@ -273,10 +273,8 @@ public class Project implements Serializable
 
             try
             {
-                //new ReaderTask().execute("http://gateway.local/site/helloservice");
-                //String str_result = new ReaderTask ().execute ("http://www.gateway.local/site/helloservice").get ();
                 String url = context.getResources ().getString (R.string.api_server)
-                        + context.getResources ().getString (R.string.api_projectlist)
+                        + Constants.API_PROJECTLIST
                         + filters + "?lang="
                         + context.getResources ().getString (R.string.api_q_lang)
                         + "&v=" + versioncode;;

@@ -16,4 +16,11 @@ public class Constants
     public static final String LOG_BWURL = "DLOG";
     public static final String LOG = "DLOG";
     public static final String ACTIVE_PROJECT_OBJECT = "AP";
+
+    public static final String API_PROJECTLIST = "/api/projectlist";
+    public static final String API_COUNTRYLIST = "/api/countries";
+    public static final String API_STAGELIST = "/api/stages";
+    public static final String API_METALLIST = "/api/metals";
+    public static final String API_PROJECT = "/api/project";
+
 }

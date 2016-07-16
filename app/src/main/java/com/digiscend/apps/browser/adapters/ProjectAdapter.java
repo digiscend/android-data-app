@@ -37,17 +37,7 @@ public class ProjectAdapter extends ArrayAdapter<Project>
         // Populate the data into the template view using the data object
         tvName.setText(project.name);
         tvCountry.setText(project.country);
-        //tvId.setText(project.id);
-        // Return the completed view to render on screen
 
-        /*convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext (), ProjectViewActivity.class);
-                String message = "abc";
-                getContext ().startActivity (intent);
-            }
-        });*/
 
         return convertView;
     }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -31,6 +32,7 @@ public class MinesActivity extends AppCompatActivity
     public final static String EXTRA_MESSAGE = "com.example.ListViewTest.MESSAGE";
 
     private String browsetype;
+    private String typename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,11 +44,14 @@ public class MinesActivity extends AppCompatActivity
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 browsetype = null;
+                typename = null;
             } else {
                 browsetype = extras.getString(BrowseActivity.EXTRA_BROWSETYPE);
+                typename = extras.getString(BrowseActivity.EXTRA_BROWSETYPENAME);
             }
         } else {
             browsetype = (String) savedInstanceState.getSerializable(BrowseActivity.EXTRA_BROWSETYPE);
+            typename = (String) savedInstanceState.getSerializable(BrowseActivity.EXTRA_BROWSETYPENAME);
         }
 
 
@@ -84,7 +89,7 @@ public class MinesActivity extends AppCompatActivity
         if(filterInfoStrings.size ()>0)
         {
             String s1 = TextUtils.join ("\n",filterInfoStrings);
-            txtfilterInfo.setText (s1);
+            txtfilterInfo.setText (Html.fromHtml (s1));
         }
         else
             txtfilterInfo.setText ("");
