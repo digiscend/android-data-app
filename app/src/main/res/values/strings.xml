@@ -18,14 +18,18 @@
     <string name="about_msg5">Landline: +51 1 470 0685</string>
     <string name="about_msg6">Mobile: +51 959502518</string>
 
-    <string name="menuitem_filter_by_metals">Filter by Minerals</string>
+    <string name="menuitem_filter_by_minerals">Filter by Minerals</string>
     <string name="menuitem_filter_by_stages">Filter by Stages</string>
     <string name="menuitem_filter_by_country">Filter by Country</string>
+
+    <string name="filterinfo_by_mineral">Minerals</string>
+    <string name="filterinfo_by_stages">Stages</string>
+    <string name="filterinfo_by_country">Country</string>
 
     <string name="title_projectlist">List of Top Projects</string>
     <string name="title_browse_stage">Browse by Stages</string>
     <string name="title_browse_country">Browse by Countries</string>
-    <string name="title_browse_metal">Browse by Minerals</string>
+    <string name="title_browse_mineral">Browse by Minerals</string>
     <string name="title_browse_search">Search Results</string>
 
     <string name="title_activity_splash">SplashActivity</string>

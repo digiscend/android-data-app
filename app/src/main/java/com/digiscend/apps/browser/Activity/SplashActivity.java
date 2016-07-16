@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity
                         + "&v=" + BuildConfig.VERSION_CODE,
 
             getResources().getString(R.string.api_server)
-                    + Constants.API_METALLIST
+                    + Constants.API_MINERALLIST
                     + "?lang=" + getResources().getString(R.string.api_q_lang)
                     + "&v=" + BuildConfig.VERSION_CODE,
 

@@ -17,25 +17,24 @@ public class BrowserFilter
 {
     public String name;
     public String htmlid;
-    public String lastbrowsetype;
-    public String lasttypename;
+    public ExtraHolder lastbrowsetype;
     /**
      * @see http://www.codeproject.com/Articles/267023/Send-and-receive-json-between-android-and-php
      * @param json
      * @return
      */
-    public static ArrayList<BrowserFilter> parseJson(String json,String browsetype,String typename)
+    public static ArrayList<BrowserFilter> parseJson(String json,ExtraHolder browsetype)
     {
         String key = "";
-        switch(browsetype)
+        switch(browsetype.baseType)
         {
-            case BrowseActivity.BROWSE_COUNTRY:
+            case COUNTRY:
                 key = "countries";
                 break;
-            case BrowseActivity.BROWSE_STAGE:
+            case STAGE:
                 key = "status";
                 break;
-            case BrowseActivity.BROWSE_METAL:
+            case MINERAL:
                 key = "metals";
                 break;
         }
@@ -57,7 +56,6 @@ public class BrowserFilter
 
                 BrowserFilter filterval = parseJsonObject (jsonFilterValue);
                 filterval.lastbrowsetype = browsetype;
-                filterval.lasttypename = typename;
                 filtervals.add (filterval);
             }
         }
@@ -103,14 +101,4 @@ public class BrowserFilter
     {
         return this.lastbrowsetype + "=" + this.htmlid;
     }
-
-    /**
-     * Will save name and htmlid
-     * @return
-     */
-    public String withLastName()
-    {
-        return this.lasttypename + "=" + this.name;
-    }
-
 }

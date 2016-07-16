@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/filter_by_metals"
-          android:title="@string/menuitem_filter_by_metals"
-          android:showAsAction="ifRoom"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/filter_by_minerals"
+          android:title="@string/menuitem_filter_by_minerals"
+          app:showAsAction="never"/>
     <item android:id="@+id/filter_by_stages"
           android:title="@string/menuitem_filter_by_stages"
-          android:showAsAction="ifRoom"/>
+          app:showAsAction="never"/>
     <item android:id="@+id/filter_by_countries"
           android:title="@string/menuitem_filter_by_country"
-          android:showAsAction="ifRoom"/>
+          app:showAsAction="never"/>
 </menu>

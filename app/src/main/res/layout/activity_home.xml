@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="showBrowseMaterial"
-        android:text="@string/title_browse_metal"
+        android:text="@string/title_browse_mineral"
         android:layout_below="@+id/browseCountry"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"

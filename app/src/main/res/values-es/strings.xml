@@ -1,42 +1,50 @@
 <resources>
 
     <string name="app_name">"Digiscend"</string>
+    <string name="login_label">"Iniciar sesión"</string>
+    <string name="button2_label">"Dos botón"</string>
     <string name="Mines_Activity_Title">"Título de la actividad minas"</string>
     <string name="title_activity_mines">"Actividad minas"</string>
     <string name="action_settings">"Ajustes"</string>
     <string name="top_projects_label">"Principales Proyectos"</string>
     <string name="menuitem_about">"Acerca de"</string>
 
+
     <string name="about_msg1">"AV. Esteban Campodónico 315"</string>
     <string name="about_msg2">"La Victoria, 15034"</string>
     <string name="about_msg3">"Lima, Perú"</string>
-    <string name="about_msg4">"Perú : (+51) 959 502 518"</string>
+    <string name="about_msg4">"Perú: (+51) 959 502 518"</string>
     <string name="about_msg5">"Teléfono fijo: +51 1 470 0685"</string>
     <string name="about_msg6">"Móvil: +51 959502518"</string>
 
-    <string name="menuitem_filter_by_metals">"Filtrar por Minerales"</string>
+    <string name="menuitem_filter_by_minerals">"Filtrar por Minerales"</string>
     <string name="menuitem_filter_by_stages">"Filtrar por Etapas"</string>
     <string name="menuitem_filter_by_country">"Filtrar por País"</string>
+
+    <string name="filterinfo_by_mineral">"Minerales"</string>
+    <string name="filterinfo_by_stages">"Etapas"</string>
+    <string name="filterinfo_by_country">"País"</string>
 
     <string name="title_projectlist">"Lista de los Mejores Proyectos"</string>
     <string name="title_browse_stage">"Exploración por Etapas"</string>
     <string name="title_browse_country">"Exploración por Países"</string>
-    <string name="title_browse_metal">"Exploración por Minerales"</string>
+    <string name="title_browse_mineral">"Exploración por Minerales"</string>
     <string name="title_browse_search">"Resultados de la búsqueda"</string>
 
     <string name="title_activity_splash">"SplashActivity"</string>
-    <string name="title_activity_milestones">"Metas"</string>
+    <string name="title_activity_milestones">"Hitos"</string>
 
-    <string name="navigation_drawer_open">"Abrir Menu"</string>
+
+    <string name="navigation_drawer_open">"Abrir panel de navegación"</string>
     <string name="navigation_drawer_close">"Cierre el cajón de navegación"</string>
-    <string name="menu_gallery">"Dimensión"</string>
-    <string name="menu_properties">"Propiedades"</string>
+    <string name="menu_gallery">"Galería"</string>
+    <string name="menu_properties">"propiedades"</string>
     <string name="menu_contractors">"Contratistas"</string>
     <string name="menu_news">"Noticias"</string>
     <string name="title_activity_project_view_milestones">"ProjectViewMilestonesActivity"</string>
 
-    <string name="search_hint">"Buscar Proyectos"</string>
-    <string name="search">"Búsqueda"</string>
+    <string name="search_hint">"Buscar proyectos"</string>
+    <string name="search">"Buscar"</string>
 
     <string name="api_q_lang">"es"</string>
 

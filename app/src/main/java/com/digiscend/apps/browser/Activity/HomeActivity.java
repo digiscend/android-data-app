@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.PreloadingTask;
 import com.digiscend.apps.browser.models.Constants;
+import com.digiscend.apps.browser.models.ExtraHolder;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,27 +63,29 @@ public class HomeActivity extends AppCompatActivity
 	public void showBrowseCountry(View view)
 	{
 		Intent intent = new Intent (HomeActivity.this, BrowseActivity.class);
-		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_COUNTRY);
+		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, new ExtraHolder (ExtraHolder.baseView.COUNTRY));
 		startActivity(intent);
 	}
 
 	public void showBrowseMaterial(View view)
 	{
 		Intent intent = new Intent (HomeActivity.this, BrowseActivity.class);
-		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_METAL);
+		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, new ExtraHolder (ExtraHolder.baseView.MINERAL));
 		startActivity(intent);
 	}
 
 	public void showBrowseStage(View view)
 	{
 		Intent intent = new Intent (HomeActivity.this, BrowseActivity.class);
-		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_STAGE);
+		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, new ExtraHolder (ExtraHolder.baseView.STAGE));
 		startActivity(intent);
 	}
 
 	public void showTopProjects(View view)
 	{
 		Intent intent = new Intent (HomeActivity.this, MinesActivity.class);
+		ExtraHolder browsetype = new ExtraHolder (ExtraHolder.baseView.PROJECTS);
+		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, browsetype);
 		startActivity(intent);
 	}
 
@@ -101,7 +104,7 @@ public class HomeActivity extends AppCompatActivity
 	public boolean onQueryTextSubmit(String query) {
 		// User pressed the search button
 		Intent intent = new Intent(getBaseContext (), MinesActivity.class);
-		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, BrowseActivity.BROWSE_SEARCH + "=" + query);
+		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, new ExtraHolder (ExtraHolder.baseView.PROJECTS,query));
 		startActivity(intent);
 		return true;
 	}

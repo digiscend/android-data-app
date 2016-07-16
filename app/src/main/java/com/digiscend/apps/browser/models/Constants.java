@@ -20,7 +20,7 @@ public class Constants
     public static final String API_PROJECTLIST = "/api/projectlist";
     public static final String API_COUNTRYLIST = "/api/countries";
     public static final String API_STAGELIST = "/api/stages";
-    public static final String API_METALLIST = "/api/metals";
+    public static final String API_MINERALLIST = "/api/metals";
     public static final String API_PROJECT = "/api/project";
 
 }

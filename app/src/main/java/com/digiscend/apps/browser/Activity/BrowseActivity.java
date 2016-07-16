@@ -15,6 +15,7 @@ import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.BrowserFilter;
 import com.digiscend.apps.browser.adapters.FilterAdapter;
 import com.digiscend.apps.browser.models.Constants;
+import com.digiscend.apps.browser.models.ExtraHolder;
 
 import java.util.ArrayList;
 
@@ -24,17 +25,9 @@ import java.util.ArrayList;
 public class BrowseActivity extends AppCompatActivity
 {
     public final static String EXTRA_BROWSETYPE = "browsetype";
-    public static final String EXTRA_BROWSETYPENAME = "typename";
-
-    public final static String BROWSE_COUNTRY = "country";
-
-    public final static String BROWSE_STAGE = "stage";
-
-    public final static String BROWSE_METAL = "metal";
-
     public final static String BROWSE_SEARCH = "q";
 
-    public String browsetype = "";
+    public ExtraHolder browsetype;
     public String typename = "";
     public String filters = "";
 
@@ -45,16 +38,9 @@ public class BrowseActivity extends AppCompatActivity
         setContentView (R.layout.activity_mines);
 
         if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                browsetype = BROWSE_COUNTRY;
-            } else {
-                browsetype = extras.getString(EXTRA_BROWSETYPE);
-                typename = extras.getString(EXTRA_BROWSETYPENAME);
-            }
+            browsetype = (ExtraHolder) getIntent().getSerializableExtra (BrowseActivity.EXTRA_BROWSETYPE);
         } else {
-            browsetype = (String) savedInstanceState.getSerializable(EXTRA_BROWSETYPE);
-            typename = (String) savedInstanceState.getSerializable(EXTRA_BROWSETYPENAME);
+            browsetype = (ExtraHolder) savedInstanceState.getSerializable(EXTRA_BROWSETYPE);
         }
 
         TextView txtfilterInfo = (TextView) findViewById(R.id.filterInfo);
@@ -62,41 +48,26 @@ public class BrowseActivity extends AppCompatActivity
 
         String api_browselisttype = "";
 
-        String[] browsetypelist = browsetype.split (",");
-        String firstbrowsetype = browsetypelist[0];
-        switch(browsetypelist[0])
+        switch(browsetype.baseType)
         {
-            case BROWSE_STAGE:
+            case STAGE:
                 api_browselisttype = Constants.API_STAGELIST;
                 setTitle (getResources().getString(R.string.title_browse_stage));
                 break;
-            case BROWSE_COUNTRY:
+            case COUNTRY:
                 api_browselisttype = Constants.API_COUNTRYLIST;
                 setTitle (getResources().getString(R.string.title_browse_country));
                 break;
-            case BROWSE_METAL:
-                api_browselisttype = Constants.API_METALLIST;
-                setTitle (getResources().getString(R.string.title_browse_metal));
+            case MINERAL:
+                api_browselisttype = Constants.API_MINERALLIST;
+                setTitle (getResources().getString(R.string.title_browse_mineral));
                 break;
         }
 
-        ArrayList<String> filterInfoStrings = new ArrayList<String>();
-
-        for(int i=1; i<browsetypelist.length; i++)
-        {
-            String item2 = browsetypelist[i];
-            if(item2 == "null")
-                break;
-
-            String[] ss = item2.split ("=");
-            if(ss.length != 2)
-                break;
-
-            filters += "/" + ss[0] + "/" + ss[1];
-
-            filterInfoStrings.add (ss[0] + ": " + ss[1]);
-        }
+        filters = browsetype.getFilters(this.getBaseContext ());
+        ArrayList<String> filterInfoStrings = browsetype.getFilterInfoStrings ();
         Log.v(Constants.LOG_BWFILTER,filters);
+
         try
         {
             String url = getResources().getString(R.string.api_server)
@@ -106,7 +77,7 @@ public class BrowseActivity extends AppCompatActivity
             Log.v(Constants.LOG_BWURL,url);
             String str_result = new ReaderTask ().execute (url).get ();
             BrowserFilter b = null;
-            ArrayList<BrowserFilter> filtervals = b.parseJson(str_result,firstbrowsetype);
+            ArrayList<BrowserFilter> filtervals = b.parseJson(str_result,browsetype);
             setFilterContent(filtervals);
         }
         catch(Exception e)
@@ -124,6 +95,12 @@ public class BrowseActivity extends AppCompatActivity
     }
     */
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // The activity is about to become visible.
+    }
+
 
 
     protected void setFilterContent(ArrayList<BrowserFilter> filtervals)
@@ -136,17 +113,17 @@ public class BrowseActivity extends AppCompatActivity
                                     long id) {
 
                 BrowserFilter val= (BrowserFilter) parent.getAdapter().getItem(position);
-                String[] lastbrowsetypelist = browsetype.split (",");
+                browsetype.addFilter(val);
+                /*String[] lastbrowsetypelist = browsetype.split (",");
                 if(lastbrowsetypelist.length>1)
                 {
                     for (int i = 1; i < lastbrowsetypelist.length; i++)
                     {
                         val.lastbrowsetype = lastbrowsetypelist[i] + "," + val.lastbrowsetype;
                     }
-                }
+                }*/
                 Intent intent = new Intent(getBaseContext (), MinesActivity.class);
-                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, val.withLastBrowseType());
-                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPENAME, val.withLastName ());
+                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, browsetype);
                 startActivity(intent);
             }
         });
