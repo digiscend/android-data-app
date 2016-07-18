@@ -48,5 +48,6 @@
     <string name="search">Search</string>
 
     <string name="api_q_lang">en</string>
+    <string name="precaching">Precaching</string>
 
 </resources>

@@ -25,13 +25,16 @@ android {
             resValue 'string', 'api_server', '"https://digiscend.com"'
         }
         debug {
-            resValue 'string', 'api_server', '"http://10.0.0.9"'
+            resValue 'string', 'api_server', '"http://192.168.5.2"'
             pseudoLocalesEnabled false
         }
     }
     productFlavors {
     }
     //apply plugin: 'com.google.gms.google-services'
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
+    }
 }
 
 repositories {

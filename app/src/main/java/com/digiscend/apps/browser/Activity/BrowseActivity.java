@@ -98,6 +98,9 @@ public class BrowseActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+
+        ExtraHolder browsetype2 = (ExtraHolder) getIntent().getSerializableExtra (BrowseActivity.EXTRA_BROWSETYPE);
+        browsetype2.search_name += "1";
         // The activity is about to become visible.
     }
 

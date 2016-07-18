@@ -25,9 +25,9 @@ public class ReaderTask extends AsyncTask<String, Void, String>
 {
 
     private Exception exception;
-    private Activity caller=null;
+    private SplashActivity caller=null;
 
-    public ReaderTask(Activity splashActivity)
+    public ReaderTask(SplashActivity splashActivity)
     {
         caller=splashActivity;
     }
@@ -52,6 +52,10 @@ public class ReaderTask extends AsyncTask<String, Void, String>
 
     protected String doInBackground(String... urls) {
         String rt="";
+
+        if(caller != null)
+            caller.updateProgress (0);
+
         try {
             for(int i=0; i<urls.length; i++)
             {
@@ -60,7 +64,7 @@ public class ReaderTask extends AsyncTask<String, Void, String>
 
                 int maxStale = 60 * 60 * 24 * 1; // tolerate 4-weeks stale
                 urlConnection.addRequestProperty ("Cache-Control", "max-stale=" + maxStale);
-                urlConnection.setUseCaches (true);
+                //urlConnection.setUseCaches (true);
 
                 //
                 //InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
@@ -78,6 +82,8 @@ public class ReaderTask extends AsyncTask<String, Void, String>
                 //
                 rt = response.toString ();
                 urlConnection.disconnect();
+                if(caller != null)
+                    caller.updateProgress (i+1);
             }
 
         } catch (Exception e) {
