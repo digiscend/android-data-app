@@ -1,5 +1,6 @@
 package com.digiscend.apps.browser.models;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.digiscend.apps.browser.R;
@@ -10,7 +11,8 @@ import java.util.ArrayList;
 /**
  * Created by vikas on 16/07/16.
  */
-public class ExtraHolder implements Serializable
+public class ExtraHolder
+        implements Serializable, Cloneable
 {
 
     public enum baseView
@@ -58,21 +60,21 @@ public class ExtraHolder implements Serializable
         if(this.country_filter.length ()>0)
         {
             filters += "/country/" + this.country_filter;
-            filterCacheId += "country-" + this.country_filter;
+            filterCacheId += "-country-" + this.country_filter;
             this.filterInfoStrings.add ( context.getResources().getString(R.string.filterinfo_by_country) + ": " + this.country_name);
         }
 
         if(this.stage_filter.length ()>0)
         {
             filters += "/stage/" + this.stage_filter;
-            filterCacheId += "stage-" + this.stage_filter;
+            filterCacheId += "-stage-" + this.stage_filter;
             this.filterInfoStrings.add ( context.getResources().getString(R.string.filterinfo_by_stages) + ": " + this.stage_name);
         }
 
         if(this.mineral_filter.length ()>0)
         {
             filters += "/mineral/" + this.mineral_filter;
-            filterCacheId += "mineral-" + this.mineral_filter;
+            filterCacheId += "-mineral-" + this.mineral_filter;
             this.filterInfoStrings.add ( context.getResources().getString(R.string.filterinfo_by_mineral) + ": " + this.mineral_name);
         }
 
@@ -111,6 +113,28 @@ public class ExtraHolder implements Serializable
 
     }
 
+    public String getBaseAPI(Activity activity)
+    {
+        String api_browselisttype = "";
+
+        switch(baseType)
+        {
+            case STAGE:
+                api_browselisttype = Constants.API_STAGELIST;
+                activity.setTitle (activity.getResources().getString(R.string.title_browse_stage));
+                break;
+            case COUNTRY:
+                api_browselisttype = Constants.API_COUNTRYLIST;
+                activity.setTitle (activity.getResources().getString(R.string.title_browse_country));
+                break;
+            case MINERAL:
+                api_browselisttype = Constants.API_MINERALLIST;
+                activity.setTitle (activity.getResources().getString(R.string.title_browse_mineral));
+                break;
+        }
+        return api_browselisttype;
+    }
+
     /**
      * Returns a unique astring format which can be used as filename to save cache
      * @return
@@ -130,7 +154,7 @@ public class ExtraHolder implements Serializable
                 pre = "country";
                 break;
         }
-        return pre + "-" + filterCacheId;
+        return pre + filterCacheId;
     }
 
     /**
@@ -140,6 +164,16 @@ public class ExtraHolder implements Serializable
     public void setBaseType(baseView viewtype)
     {
         this.baseType = viewtype;
+    }
+
+    public ExtraHolder clone() {
+        try {
+            return (ExtraHolder)super.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            // This should never happen
+        }
+        return null;
     }
 
 

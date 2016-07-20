@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity
 	{
 		Intent intent = new Intent (HomeActivity.this, MinesActivity.class);
 		ExtraHolder browsetype = new ExtraHolder (ExtraHolder.baseView.PROJECTS);
-		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, browsetype);
+		intent.putExtra(BrowseActivity.EXTRA_PLBROWSETYPE, browsetype);
 		startActivity(intent);
 	}
 

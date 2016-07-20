@@ -42,9 +42,9 @@ public class MinesActivity extends AppCompatActivity
         setContentView (R.layout.activity_mines);
 
         if (savedInstanceState == null) {
-            browsetype = (ExtraHolder) getIntent().getSerializableExtra (BrowseActivity.EXTRA_BROWSETYPE);
+            browsetype = (ExtraHolder) getIntent().getSerializableExtra (BrowseActivity.EXTRA_PLBROWSETYPE);
         } else {
-            browsetype = (ExtraHolder) savedInstanceState.getSerializable(BrowseActivity.EXTRA_BROWSETYPE);
+            browsetype = (ExtraHolder) savedInstanceState.getSerializable(BrowseActivity.EXTRA_PLBROWSETYPE);
         }
 
 

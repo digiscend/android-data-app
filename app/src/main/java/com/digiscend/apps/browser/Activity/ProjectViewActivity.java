@@ -96,7 +96,6 @@ public class ProjectViewActivity extends AppCompatActivity
         TextView tvCompany = (TextView)findViewById (R.id.companyName);
         TextView tvIntro = (TextView)findViewById (R.id.projectIntro);
 
-
         setTitle(p.name);
         tvCountry.setText (p.country);
         if(tvIntro != null)

@@ -1,6 +1,7 @@
 package com.digiscend.apps.browser.models;
 
 import android.content.Context;
+import android.support.v4.app.NotificationCompatSideChannelService;
 import android.util.Log;
 
 import com.digiscend.apps.browser.R;
@@ -111,10 +112,18 @@ public class Project implements Serializable
                 obj.company = c.parseJsonObject(jProject.getJSONObject ("selectedCompany"));
             }
 
-            AttrValue av = new AttrValue ();
+            AttrValue av = null;
             if(jProject.has("attributevalues"))
             {
-                obj.attrvalues = av.parseJsonObject(jProject.getJSONObject ("attributevalues"));
+                try
+                {
+                    JSONObject avs = jProject.getJSONObject ("attributevalues");
+                    obj.attrvalues = av.parseJsonObject (avs);
+                }
+                catch (Exception e)
+                {
+                    //any error
+                }
             }
 
             processProjects("milestoneProjects",obj.milestoneProjects,jProject);
@@ -178,6 +187,8 @@ public class Project implements Serializable
                     filefound = false;
                     context.openFileInput (CACHEFILENAME);
                 }
+                else
+                    Log.v (Constants.LOG_PVCACHEFOUND, CACHEFILENAME + "  FOUND!");
                 ois.close();
                 fis.close ();
             }
@@ -194,6 +205,7 @@ public class Project implements Serializable
         }
         if(!filefound)
         {
+            Log.v (Constants.LOG_PVCACHENOTFOUND, CACHEFILENAME + " not found");
             ArrayList<Project> projects = null;
             String str_result = null;
             try
@@ -224,6 +236,7 @@ public class Project implements Serializable
                 fos = context.openFileOutput(CACHEFILENAME, Context.MODE_PRIVATE);
                 out = new ObjectOutputStream(fos);
                 out.writeObject (currentProject);
+                Log.v (Constants.LOG_PVCACHESAVED, CACHEFILENAME + " SAVED");
                 out.close ();
                 fos.close();
             } catch (Exception e)
@@ -234,11 +247,11 @@ public class Project implements Serializable
         return currentProject;
     }
 
-    public static ArrayList<Project> loadlistByFilters(String filters,String filters2,Context context,int versioncode)
+    public static ArrayList<Project> loadlistByFilters(String filters,String filters2,Context context,int versionCode)
     {
         ArrayList<Project> projects = null;
         boolean filefound = true;
-        String CACHEFILENAME = "projects." + versioncode + "." + filters2;
+        String CACHEFILENAME = "projects." + versionCode + "." + filters2;
 
         //check if serialized copy of project in local cache
         if (filefound)//found in local cache)
@@ -254,8 +267,10 @@ public class Project implements Serializable
                 if(projects == null)
                 {
                     filefound = false;
-                    context.openFileInput (CACHEFILENAME);
                 }
+                else
+                    Log.v (Constants.LOG_PLCACHEFOUND, CACHEFILENAME + "  FOUND!");
+
                 ois.close ();
                 fis.close ();
             } catch (FileNotFoundException e)
@@ -270,14 +285,14 @@ public class Project implements Serializable
         }
         if (!filefound)
         {
-
+            Log.v (Constants.LOG_PLCACHENOTFOUND, CACHEFILENAME + " not found");
             try
             {
                 String url = context.getResources ().getString (R.string.api_server)
                         + Constants.API_PROJECTLIST
                         + filters + "?lang="
                         + context.getResources ().getString (R.string.api_q_lang)
-                        + "&v=" + versioncode;;
+                        + "&v=" + versionCode;
                 Log.v (Constants.LOG_PLURL, url);
                 String str_result = new ReaderTask ().execute (url).get ();
                 projects = parseJson (str_result);
@@ -288,6 +303,7 @@ public class Project implements Serializable
                 fos = context.openFileOutput (CACHEFILENAME, Context.MODE_PRIVATE);
                 out = new ObjectOutputStream (fos);
                 out.writeObject (projects);
+                Log.v (Constants.LOG_PLCACHESAVED, CACHEFILENAME + " SAVED");
                 out.close ();
                 fos.close ();
             } catch (Exception e)

@@ -3,6 +3,7 @@ package com.digiscend.apps.browser.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.digiscend.apps.browser.BuildConfig;
 import com.digiscend.apps.browser.R;
 import com.digiscend.apps.browser.Task.ReaderTask;
 import com.digiscend.apps.browser.models.BrowserFilter;
 import com.digiscend.apps.browser.adapters.FilterAdapter;
 import com.digiscend.apps.browser.models.Constants;
 import com.digiscend.apps.browser.models.ExtraHolder;
+import com.digiscend.apps.browser.models.Project;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ public class BrowseActivity extends AppCompatActivity
 {
     public final static String EXTRA_BROWSETYPE = "browsetype";
     public final static String BROWSE_SEARCH = "q";
+    public static final String EXTRA_PLBROWSETYPE = "plbrowsetype";
 
     public ExtraHolder browsetype;
     public String typename = "";
@@ -37,55 +41,31 @@ public class BrowseActivity extends AppCompatActivity
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_mines);
 
-        if (savedInstanceState == null) {
-            browsetype = (ExtraHolder) getIntent().getSerializableExtra (BrowseActivity.EXTRA_BROWSETYPE);
-        } else {
-            browsetype = (ExtraHolder) savedInstanceState.getSerializable(EXTRA_BROWSETYPE);
-        }
-
-        TextView txtfilterInfo = (TextView) findViewById(R.id.filterInfo);
-        txtfilterInfo.setText ("");
-
-        String api_browselisttype = "";
-
-        switch(browsetype.baseType)
+        if (savedInstanceState == null)
         {
-            case STAGE:
-                api_browselisttype = Constants.API_STAGELIST;
-                setTitle (getResources().getString(R.string.title_browse_stage));
-                break;
-            case COUNTRY:
-                api_browselisttype = Constants.API_COUNTRYLIST;
-                setTitle (getResources().getString(R.string.title_browse_country));
-                break;
-            case MINERAL:
-                api_browselisttype = Constants.API_MINERALLIST;
-                setTitle (getResources().getString(R.string.title_browse_mineral));
-                break;
+            browsetype = (ExtraHolder) getIntent ().getSerializableExtra (BrowseActivity.EXTRA_BROWSETYPE);
+        } else
+        {
+            browsetype = (ExtraHolder) savedInstanceState.getSerializable (EXTRA_BROWSETYPE);
         }
 
-        filters = browsetype.getFilters(this.getBaseContext ());
         ArrayList<String> filterInfoStrings = browsetype.getFilterInfoStrings ();
-        Log.v(Constants.LOG_BWFILTER,filters);
-
-        try
+        TextView txtfilterInfo = (TextView) findViewById(R.id.filterInfo);
+        if(filterInfoStrings.size ()>0)
         {
-            String url = getResources().getString(R.string.api_server)
-                    + api_browselisttype
-                    + filters
-                    + "?lang=" + getResources().getString(R.string.api_q_lang);
-            Log.v(Constants.LOG_BWURL,url);
-            String str_result = new ReaderTask ().execute (url).get ();
-            BrowserFilter b = null;
-            ArrayList<BrowserFilter> filtervals = b.parseJson(str_result,browsetype);
-            setFilterContent(filtervals);
+            String s1 = TextUtils.join ("\n",filterInfoStrings);
+            txtfilterInfo.setText (s1);
         }
-        catch(Exception e)
-        {
+        else
+            txtfilterInfo.setText ("");
 
-        }
 
+        //ArrayList<String> filterInfoStrings = browsetype.getFilterInfoStrings ();
+        BrowserFilter bf = null;
+        ArrayList<BrowserFilter> filtervals = bf.loadlistByFilters (browsetype, this, BuildConfig.VERSION_CODE);
+        setFilterContent (filtervals);
     }
+
     /*
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id)
@@ -116,7 +96,8 @@ public class BrowseActivity extends AppCompatActivity
                                     long id) {
 
                 BrowserFilter val= (BrowserFilter) parent.getAdapter().getItem(position);
-                browsetype.addFilter(val);
+                ExtraHolder browsetype_for_mines = browsetype.clone ();
+                browsetype_for_mines.addFilter(val);
                 /*String[] lastbrowsetypelist = browsetype.split (",");
                 if(lastbrowsetypelist.length>1)
                 {
@@ -126,7 +107,7 @@ public class BrowseActivity extends AppCompatActivity
                     }
                 }*/
                 Intent intent = new Intent(getBaseContext (), MinesActivity.class);
-                intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, browsetype);
+                intent.putExtra(BrowseActivity.EXTRA_PLBROWSETYPE, browsetype_for_mines);
                 startActivity(intent);
             }
         });

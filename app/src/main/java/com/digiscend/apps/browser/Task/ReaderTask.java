@@ -64,7 +64,7 @@ public class ReaderTask extends AsyncTask<String, Void, String>
 
                 int maxStale = 60 * 60 * 24 * 1; // tolerate 4-weeks stale
                 urlConnection.addRequestProperty ("Cache-Control", "max-stale=" + maxStale);
-                //urlConnection.setUseCaches (true);
+                urlConnection.setUseCaches (true);
 
                 //
                 //InputStream in = new BufferedInputStream (urlConnection.getInputStream ());
