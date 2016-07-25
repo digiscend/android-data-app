@@ -27,7 +27,6 @@ import com.digiscend.apps.browser.adapters.ProjectAdapter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-
 public class MinesActivity extends AppCompatActivity
 {
     public final static String EXTRA_MESSAGE = "com.example.ListViewTest.MESSAGE";
@@ -46,7 +45,6 @@ public class MinesActivity extends AppCompatActivity
         } else {
             browsetype = (ExtraHolder) savedInstanceState.getSerializable(BrowseActivity.EXTRA_PLBROWSETYPE);
         }
-
 
         String filters = browsetype.getFilters (getBaseContext ());
         ArrayList<String> filterInfoStrings = browsetype.getFilterInfoStrings ();
@@ -68,6 +66,15 @@ public class MinesActivity extends AppCompatActivity
         //setSupportActionBar (toolbar);
         Project p = null;
         ArrayList<Project> projects = p.loadlistByFilters(filters,filterCacheId,getBaseContext (), BuildConfig.VERSION_CODE);
+        if(browsetype.search_filter.length () > 0)
+        {
+            if(projects.size ()==1)
+            {
+                //we just directly open the project
+                p = projects.get (0);
+
+            }
+        }
         setProjects (projects);
     }
 

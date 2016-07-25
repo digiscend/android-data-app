@@ -23,14 +23,16 @@ import java.io.IOException;
 public class HomeActivity extends AppCompatActivity
 		implements SearchView.OnQueryTextListener
 {
+	SearchView searchview = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 
-		SearchView search=(SearchView) findViewById (R.id.searchView1);
-		search.setQueryHint(getResources ().getString (R.string.search));
-		search.setOnQueryTextListener(this);
+		searchview=(SearchView) findViewById (R.id.searchView1);
+		searchview.setQueryHint(getResources ().getString (R.string.search));
+		searchview.setOnQueryTextListener(this);
 
         File httpCacheDir = new File (getApplicationContext().getCacheDir()
 				, "http");
@@ -104,8 +106,9 @@ public class HomeActivity extends AppCompatActivity
 	public boolean onQueryTextSubmit(String query) {
 		// User pressed the search button
 		Intent intent = new Intent(getBaseContext (), MinesActivity.class);
-		intent.putExtra(BrowseActivity.EXTRA_BROWSETYPE, new ExtraHolder (ExtraHolder.baseView.PROJECTS,query));
+		intent.putExtra(BrowseActivity.EXTRA_PLBROWSETYPE, new ExtraHolder (ExtraHolder.baseView.PROJECTS,query));
 		startActivity(intent);
+		searchview.clearFocus();
 		return true;
 	}
 

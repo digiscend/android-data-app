@@ -49,5 +49,7 @@
 
     <string name="api_q_lang">en</string>
     <string name="precaching">Loading</string>
+    <string name="filterinfo_by_search">Search Results</string>
+    <string name="about_info1"><![CDATA[Digiscend platform generates information based on project data from the mining, energy and oil &amp; gas sectors.]]></string>
 
 </resources>

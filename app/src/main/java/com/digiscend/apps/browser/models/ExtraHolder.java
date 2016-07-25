@@ -78,6 +78,13 @@ public class ExtraHolder
             this.filterInfoStrings.add ( context.getResources().getString(R.string.filterinfo_by_mineral) + ": " + this.mineral_name);
         }
 
+        if(this.search_filter.length ()>0)
+        {
+            filters += "/q/" + this.search_filter;
+            filterCacheId += "-search-" + this.search_filter;
+            this.filterInfoStrings.add ( context.getResources().getString(R.string.filterinfo_by_search) + ": " + this.search_filter);
+        }
+
         return filters;
     }
 

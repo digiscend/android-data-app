@@ -48,5 +48,7 @@
 
     <string name="api_q_lang">"es"</string>
     <string name="precaching">Cargando</string>
+    <string name="filterinfo_by_search">Search Results</string>
+    <string name="about_info1"><![CDATA[Digiscent plataforma genera información sobre la base de datos del proyecto de la minería, la energía y el petróleo y el gas; sectores.]]></string>
 
 </resources>
